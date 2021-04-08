@@ -1,0 +1,168 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+.mainPreview{
+  display: grid;
+  grid-template-columns: 1fr 5.5fr;
+}
+nav{
+  background-color: white;
+  position: sticky;
+  top: 0;
+}
+.nav-body{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: auto;
+}
+.logoHeading {
+  color: black;
+  font-size: 1.8rem;
+}
+.Search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40vw;
+  height: 2.1rem;
+  border-radius: 3px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+}
+.Search > input {
+  margin: 5px;
+  width: 100%;
+  height: 1.8rem;
+  border: none;
+  outline: none;
+}
+.Search > button{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  margin-top: 4px;
+}
+.bell-icon{
+  color: gray;
+  font-size: 1.2rem;
+  padding-right: 3rem;
+}
+.sidebar{
+  padding: 10px;
+  width: fit-content;
+  height: 84vh;
+  position: sticky;
+  top: 50px;
+  left: 0px;
+}
+.sidebar_element {
+  font-size: 20px;
+  color: var(--secondary);
+  text-align: start;
+  padding: 14px 0px;
+}
+.sidebar_element > span{
+  margin-left: 10px;
+}
+.selected{
+  font-weight: bold;
+  color: thistle;
+}
+.AllVideos{
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem 0;
+}
+.videoCard{
+  width: min-content;
+  cursor: pointer;
+  padding: 5px;
+}
+.videoCard:hover{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.title{
+  font-size: 20px;
+}
+.detailArea{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.description{
+  margin-top: 1rem;
+  font-size: 16px;
+}
+.detailIconBox{
+  font-size: 20px;
+  display: flex;
+  color: gray;
+  margin-right: 50px;
+}
+.createPlaylist-btn{
+  float: right;
+  color: var(--primary);
+  font-size: 17px;
+  outline: navajowhite;
+  border: none;
+  background: transparent;
+  margin: 7px;
+  cursor: pointer;
+}
+@media only screen and (max-width: 768px) {
+  .mainPreview,.AllVideos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav{
+    height: 6rem;
+  }
+  .Search {
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 90vw;
+    height: 2.1rem;
+    margin: auto;
+    display: flex;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  .bell-icon {
+    padding-right: 1rem;
+  }
+  .sidebar{
+    padding: 0;
+    display: flex;
+    justify-content: space-evenly;
+    position: fixed;
+    width: 100%;
+    background-color: #cce5ff;
+    bottom: 0;
+    top: inherit;
+    height: fit-content;
+  }
+  .sidebar_element > span{
+    display: none;
+  }
+  .title,.description{
+    margin-left: 10px;
+  }
+  .detailArea{
+    display: block;
+    margin-left: 10px;
+  }
+  .detailIconBox{
+    margin-right: 0;
+    padding: 10px;
+  }
+}
