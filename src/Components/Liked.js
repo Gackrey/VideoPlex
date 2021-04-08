@@ -7,10 +7,13 @@ const Liked = () => {
     const { LikedList, dispatch } = useVideoContext();
     return (LikedList.length>0?
         <div>
+        <p style={{textAlign:"start", fontSize:"20px",fontWeight:"bold",color:"GrayText"}}>
+        Liked ({LikedList.length} {LikedList.length>1?'videos':'video'})
+        </p>
             {LikedList.map(liked => {
                 return (
-                    <div style={{ display: "flex", margin: "10px" }}>
-                        <Link to={`/video/${liked.id}`} style={{ textDecoration: "none" }}>
+                    <div style={{ display: "flex", margin: "10px",border:"1px solid black",padding:"10px"  }}>
+                        <Link to={`/video/${liked.id}`} style={{ textDecoration: "none"}}>
                             <div style={{ display: "flex" }}>
                                 <img src={liked.snippet.thumbnails.default.url} alt="" />
                                 <div style={{ marginLeft: "10px" }}>
@@ -20,7 +23,7 @@ const Liked = () => {
                             </div>
                         </Link>
                         <FontAwesomeIcon style={{ marginLeft: "10px", cursor: "pointer", color: "gray" }} icon={faTrash}
-                            onClick={() => dispatch({ type: "REMOVE_FROM_LIKED", payload: liked.id })} />
+                            onClick={() => dispatch({ type: "REMOVE_FROM_LIKED", payload: liked })} />
                     </div>
                 )
             })}

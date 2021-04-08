@@ -72,7 +72,7 @@ const VideoPlayer = () => {
         <div style={{ textAlign: "start" }}>
             <PlayListButton state={saveClick} video={displayedVideo} />
             <YouTube videoId={displayedVideo.id} opts={opts}
-                onReady={() => dispatch({ type: "ADD_TO_HISTORY", payload: displayedVideo })} />
+                onPlay={() => dispatch({ type: "ADD_TO_HISTORY", payload: displayedVideo })} />
             <p className="title">{displayedVideo.snippet.title}</p>
             <div className="detailArea">
                 <span style={{ textAlign: "start", color: "GrayText" }}>

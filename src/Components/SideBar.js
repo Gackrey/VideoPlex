@@ -36,7 +36,7 @@ const SideBar = () => {
                 style={{ textDecoration: "none" }}
             >
                 <div className="sidebar_element">
-                    <FontAwesomeIcon icon={faHistory} className='logo' /><span>History</span></div>
+                    <FontAwesomeIcon icon={faHistory}/><span>History</span></div>
             </NavLink>
             <NavLink
                 to="/watch-later"
@@ -44,7 +44,7 @@ const SideBar = () => {
                 style={{ textDecoration: "none" }}
             >
                 <div className="sidebar_element">
-                    <FontAwesomeIcon icon={faClock} className='logo' /><span>Watch Later</span></div>
+                    <FontAwesomeIcon icon={faClock}/><span>Watch Later</span></div>
             </NavLink>
             <NavLink
                 to="/liked"
@@ -52,7 +52,7 @@ const SideBar = () => {
                 style={{ textDecoration: "none" }}
             >
                 <div className="sidebar_element">
-                    <FontAwesomeIcon icon={faThumbsUp} className='logo' /><span>Liked Videos</span></div>
+                    <FontAwesomeIcon icon={faThumbsUp}/><span>Liked Videos</span></div>
             </NavLink>
             <NavLink
                 to="/playlist"
@@ -60,7 +60,7 @@ const SideBar = () => {
                 style={{ textDecoration: "none" }}
             >
                 <div className="sidebar_element">
-                    <FontAwesomeIcon icon={faIndent} className='logo' /><span>PlayList</span></div>
+                    <FontAwesomeIcon icon={faIndent}/><span>PlayList</span></div>
             </NavLink>
         </div>
     );

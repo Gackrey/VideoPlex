@@ -27,9 +27,7 @@ const VideoCard = ({ videos }) => {
                     return(
                     <div key={video.id} >
                         <Link to={`/video/${video.id}`} style={{ textDecoration: "none" }}>
-                            <div className="videoCard" onClick={() =>
-                                dispatch({ type: "ADD_TO_HISTORY", payload: video })
-                            }>
+                            <div className="videoCard">
                                 <img src={video.snippet.thumbnails.medium.url} style={{ width: "300px" }} alt="" />
                                 <div style={{ marginLeft: "10px" }}>
                                     <p style={{ textAlign: "start", color: "black" }}>{video.snippet.title}</p>

@@ -7,9 +7,12 @@ const WatchLater = () => {
     const { WatchLater, dispatch } = useVideoContext();
     return (WatchLater.length>0?
         <div>
+        <p style={{textAlign:"start", fontSize:"20px",fontWeight:"bold",color:"GrayText"}}>
+        Watch Later ({WatchLater.length} {WatchLater.length>1?'videos':'video'})
+        </p>
             {WatchLater.map(later => {
                 return (
-                    <div key={later.id} style={{ display: "flex", margin: "10px" }}>
+                    <div key={later.id} style={{ display: "flex", margin: "10px",border:"1px solid black",padding:"10px"  }}>
                         <Link to={`/video/${later.id}`} style={{ textDecoration: "none" }}>
                             <div style={{ display: "flex" }}>
                                 <img src={later.snippet.thumbnails.default.url} alt="" />

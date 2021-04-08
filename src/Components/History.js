@@ -9,7 +9,7 @@ const History = () => {
         <div>
             {HistoryList.map(history => {
                 return (
-                    <div key={history.id} style={{ display: "flex", margin: "10px" }}>
+                    <div key={history.id} style={{ display: "flex", margin: "10px",border:"1px solid black",padding:"10px" }}>
                         <Link to={`/video/${history.id}`} style={{ textDecoration: "none" }}>
                             <div style={{ display: "flex" }}>
                                 <img src={history.snippet.thumbnails.default.url} alt="" />

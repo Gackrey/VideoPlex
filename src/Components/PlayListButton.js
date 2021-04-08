@@ -28,7 +28,7 @@ const PlayListButton = ({ state, video }) => {
             alignItems: "center",
             width: "100%",
             height: "100vh",
-            backgroundColor: "rgba(0,0,0,0.35)",
+            backgroundColor: "transparent",
             pointerEvents: "none",
         }}>
             <div style={{ backgroundColor: "white", pointerEvents: "all", display: boxDisplay }}>
