@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 *{
   margin: 0;
   padding: 0;
@@ -5,6 +6,9 @@
 .App {
   font-family: sans-serif;
   text-align: center;
+}
+.logo_icon{
+  width: 50px;
 }
 .mainPreview{
   display: grid;
@@ -14,6 +18,7 @@ nav{
   background-color: white;
   position: sticky;
   top: 0;
+  border-bottom: 2px solid black;
 }
 .nav-body{
   display: flex;
@@ -25,6 +30,7 @@ nav{
 .logoHeading {
   color: black;
   font-size: 1.8rem;
+  font-family: 'Rubik', sans-serif;
 }
 .Search {
   display: flex;
@@ -125,6 +131,7 @@ nav{
   }
   nav{
     height: 6rem;
+    background-color: var(--primaryback);
   }
   .Search {
     align-items: center;
@@ -154,8 +161,12 @@ nav{
   .sidebar_element > span{
     display: none;
   }
-  .title,.description{
+  .title{
     margin-left: 10px;
+  }
+  .description{
+    margin-left: 10px;
+    margin-bottom: 4rem;
   }
   .detailArea{
     display: block;
