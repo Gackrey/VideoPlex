@@ -15,7 +15,7 @@ const Library = () => {
     console.log(playlistKeys);
 
     return (
-        <div>
+        <div className="library">
             <div className="library_heading">
                 <p style={{ textAlign: "start", fontSize: "20px", fontWeight: "bold", color: "GrayText" }}>
                     <FontAwesomeIcon icon={faHistory} />

@@ -143,6 +143,9 @@ nav{
   justify-content: center;
   background-color: rgba(0,0,0,0.55);
 }
+.library{
+  width: 100%;
+}
 @media only screen and (max-width: 768px) {
   .mainPreview,.AllVideos{
     display: flex;
@@ -197,11 +200,11 @@ nav{
     margin-right: 0;
     padding: 10px;
   }
-  .library_body{
-    justify-content: center;
-  }
   .playlist_cover{
     width: 66px;
     height: 91px;
+  }
+  .library{
+    width: 86%;
   }
 }

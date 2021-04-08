@@ -25,7 +25,7 @@ export function VideoCard_Library_playlist({ name, playlist }) {
     return (
         playlist.length > 0 ?
             <div key={playlist[0].id} >
-                <Link to={`/playlist}`} style={{ textDecoration: "none" }}>
+                <Link to='/playlist' style={{ textDecoration: "none" }}>
                     <div className="videoCard">
                         <div className="playlist_cover">
                             <FontAwesomeIcon icon={faIndent} style={{color:"black",fontSize:"24px"}}/>
