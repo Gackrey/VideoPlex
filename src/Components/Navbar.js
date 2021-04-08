@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import user from '../Img/user.jpg'
 import play from '../Img/play.png'
 import { Link } from 'react-router-dom'
+import { useVideoContext } from '../Context/VideoContext';
 const Navbar = () => {
+  const { AllVideos, dispatch } = useVideoContext();
+  const [searchContent, setSearchContent] = useState('')
+  function searchHandler() {
+    dispatch({ type: "SEARCH_QUERY", payload: {All:AllVideos ,query:searchContent} });
+    setSearchContent("");
+  }
   return (
     <nav>
       <div className="nav-body">
@@ -17,16 +24,11 @@ const Navbar = () => {
             <input
               type="text"
               placeholder="Search"
-            // value={searchContent}
-            // onChange={(e) => setSearchContent(e.target.value)}
+              value={searchContent}
+              onChange={(e) => setSearchContent(e.target.value)}
             ></input>
             <button
-              onClick={() => {
-                console.log(searchContent);
-                // dispatch({ type: "SEARCH_RESULT", payload: searchContent });
-                // setsearchState(true);
-                // setSearchContent("");
-              }}
+              onClick={searchHandler}
             >
               <svg
                 width="20"
@@ -60,15 +62,11 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="Search"
-          // value={searchContent}
-          // onChange={(e) => setSearchContent(e.target.value)}
+            value={searchContent}
+            onChange={(e) => setSearchContent(e.target.value)}
           ></input>
           <button
-            onClick={() => {
-              //   dispatch({ type: "SEARCH_RESULT", payload: searchContent });
-              //   setsearchState(true);
-              //   setSearchContent("");
-            }}
+            onClick={searchHandler}
           >
             <svg
               width="20"

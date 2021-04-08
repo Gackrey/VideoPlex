@@ -1,5 +1,18 @@
 export default function reducer(state, action) {
     switch (action.type) {
+        case 'SEARCH_QUERY':
+            return {
+                ...state,
+                SearchResult:
+                    action.payload.All.filter(item =>
+                        item.snippet.title.includes(action.payload.query)
+                    )
+            }
+        case 'REGAIN_VIDEOS':
+            return {
+                ...state,
+                SearchResult:[]
+            }
         case 'ADD_TO_HISTORY':
             let isAlreadyPresent = state.HistoryList.filter(item => item.id === action.payload.id)
             if (isAlreadyPresent.length === 0)
@@ -26,6 +39,9 @@ export default function reducer(state, action) {
             return { ...state, WatchLater: state.WatchLater.filter(item => item.id !== action.payload) }
         case 'CREATE_PLAYLIST':
             return { ...state, Playlist: { ...state.Playlist, [action.payload]: [] } }
+        case 'DELETE_PLAYLIST':
+            delete state.Playlist[action.payload]
+            return state;
         case 'ADD_TO_PLAYLIST':
             return {
                 ...state,

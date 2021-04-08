@@ -108,6 +108,7 @@ const PlayListButton = ({ state, video }) => {
                             setClickedState(false)
                             dispatch({ type: "CREATE_PLAYLIST", payload: playlistName })
                             setClickedState(false)
+                            setPlaylistName('')
                         }}
                     >CREATE</button>
                 </div>

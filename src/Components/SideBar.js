@@ -9,7 +9,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from 'react-router-dom'
+import { useVideoContext } from '../Context/VideoContext';
 const SideBar = () => {
+    const { dispatch } = useVideoContext();
     return (
         <div className="sidebar">
             <NavLink
@@ -18,7 +20,7 @@ const SideBar = () => {
                 activeClassName="selected"
                 style={{ textDecoration: "none" }}
             >
-                <div className="sidebar_element">
+                <div className="sidebar_element" onClick={() => dispatch({type:"REGAIN_VIDEOS"})}>
                     <FontAwesomeIcon icon={faHome} className='logo' /><span>Home</span></div>
             </NavLink>
             <NavLink

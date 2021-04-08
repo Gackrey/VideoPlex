@@ -18,10 +18,10 @@ function DateCalculator({ date }) {
         return Math.ceil(timeElapsed_inhours / 24) + ' days ago'
 }
 export function AllVideosListing() {
-    const { AllVideos, dispatch } = useVideoContext();
+    const { AllVideos, SearchResult } = useVideoContext();
     return (
         <div className="AllVideos">
-            {AllVideos.map(video => {
+            {SearchResult.length > 0 ? SearchResult.map(video => {
                 return (
                     <div key={video.id} >
                         <Link to={`/video/${video.id}`} style={{ textDecoration: "none" }}>
@@ -36,7 +36,23 @@ export function AllVideosListing() {
                         </Link>
                     </div>
                 )
-            })}
+            }):AllVideos.map(video => {
+                return (
+                    <div key={video.id} >
+                        <Link to={`/video/${video.id}`} style={{ textDecoration: "none" }}>
+                            <div className="videoCard" >
+                                <img src={video.snippet.thumbnails.medium.url} style={{ width: "300px" }} alt="" />
+                                <div style={{ marginLeft: "10px" }}>
+                                    <p style={{ textAlign: "start", color: "black" }}>{video.snippet.title}</p>
+                                    <p style={{ marginTop: "10px", textAlign: "start", color: "GrayText" }}>{video.snippet.channelTitle}</p>
+                                    <p style={{ textAlign: "start", color: "GrayText" }}>{<ViewCalculator views={video.statistics.viewCount} />} . {<DateCalculator date={video.snippet.publishedAt} />}</p>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
+                )
+            })
+        }
         </div>
     )
 }

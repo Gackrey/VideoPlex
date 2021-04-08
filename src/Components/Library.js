@@ -12,8 +12,6 @@ import { Link } from 'react-router-dom'
 const Library = () => {
     const { HistoryList, Playlist, WatchLater, LikedList } = useVideoContext();
     const playlistKeys = Object.keys(Playlist)
-    console.log(playlistKeys);
-
     return (
         <div className="library">
             <div className="library_heading">
@@ -27,7 +25,9 @@ const Library = () => {
             </div>
             <div className="library_body">
             {
-                HistoryList.map(history => <VideoCard_Library_normal video= {history} />)
+                HistoryList.length>0?
+                HistoryList.map(history => <VideoCard_Library_normal video= {history} />):
+                <p style={{textAlign:"center",width:"100%",fontSize:"20px"}}>No History found</p>
             }
             </div>
             <div className="library_heading">
@@ -41,7 +41,9 @@ const Library = () => {
             </div>
             <div className="library_body">
             {
-                WatchLater.map(watch => <VideoCard_Library_normal video= {watch} />)
+                WatchLater.length>0?
+                WatchLater.map(watch => <VideoCard_Library_normal video= {watch} />):
+                <p style={{textAlign:"center",width:"100%",fontSize:"20px"}}>You are all caught up</p>
             }
             </div>
             <div className="library_heading">
@@ -55,7 +57,9 @@ const Library = () => {
             </div>
             <div className="library_body">
             {
-                playlistKeys.map(watch => <VideoCard_Library_playlist name={watch} playlist={Playlist[watch]} />)
+                playlistKeys.length>0?
+                playlistKeys.map(watch => <VideoCard_Library_playlist name={watch} playlist={Playlist[watch]} />):
+                <p style={{textAlign:"center",width:"100%",fontSize:"20px"}}>No playlist found</p>
             }
             </div>
             <div className="library_heading">
@@ -69,7 +73,9 @@ const Library = () => {
             </div>
             <div className="library_body">
             {
-                LikedList.map(liked => <VideoCard_Library_normal video= {liked} />)
+                LikedList.length>0?
+                LikedList.map(liked => <VideoCard_Library_normal video= {liked} />):
+                <p style={{textAlign:"center",width:"100%",fontSize:"20px"}}>No liked videos found</p>
             }
             </div>
         </div>

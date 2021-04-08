@@ -21,7 +21,6 @@ export function VideoCard_Library_normal({ video }) {
     );
 }
 export function VideoCard_Library_playlist({ name, playlist }) {
-    console.log(playlist);
     return (
         playlist.length > 0 ?
             <div key={playlist[0].id} >
@@ -43,6 +42,6 @@ export function VideoCard_Library_playlist({ name, playlist }) {
                             }}>{name}</p>
                     </div>
                 </Link>
-            </div> : ""
+            </div> : <p style={{textAlign:"center",width:"100%",fontSize:"20px"}}>No videos in playlists found</p>
     );
 }
