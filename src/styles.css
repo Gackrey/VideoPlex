@@ -134,6 +134,15 @@ nav{
   flex-wrap: wrap;
   justify-content: flex-start;
 }
+.playlist_cover{
+  position: absolute;
+  width: 191px;
+  height: 168px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.55);
+}
 @media only screen and (max-width: 768px) {
   .mainPreview,.AllVideos{
     display: flex;
@@ -164,6 +173,7 @@ nav{
     justify-content: space-evenly;
     position: fixed;
     width: 100%;
+    z-index: 1;
     background-color: #cce5ff;
     bottom: 0;
     top: inherit;
@@ -189,5 +199,9 @@ nav{
   }
   .library_body{
     justify-content: center;
+  }
+  .playlist_cover{
+    width: 66px;
+    height: 91px;
   }
 }

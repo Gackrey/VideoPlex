@@ -7,10 +7,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useVideoContext } from '../Context/VideoContext';
-import { VideoCard_Library_normal } from './VideoCard_Library'
+import { VideoCard_Library_normal,VideoCard_Library_playlist } from './VideoCard_Library'
 import { Link } from 'react-router-dom'
 const Library = () => {
     const { HistoryList, Playlist, WatchLater, LikedList } = useVideoContext();
+    const playlistKeys = Object.keys(Playlist)
+    console.log(playlistKeys);
+
     return (
         <div>
             <div className="library_heading">
@@ -49,6 +52,11 @@ const Library = () => {
                 <Link to='/playlist' style={{ textDecoration: "none", color: "var(--primary)",marginRight:"20px" }}>
                     See All
             </Link>
+            </div>
+            <div className="library_body">
+            {
+                playlistKeys.map(watch => <VideoCard_Library_playlist name={watch} playlist={Playlist[watch]} />)
+            }
             </div>
             <div className="library_heading">
                 <p style={{ textAlign: "start", fontSize: "20px", fontWeight: "bold", color: "GrayText" }}>
