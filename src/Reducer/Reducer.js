@@ -1,5 +1,9 @@
 export default function reducer(state, action) {
     switch (action.type) {
+        case 'INITIALIZE_VIDEOS':
+            return {
+                ...state, AllVideos: action.payload
+            }
         case 'SEARCH_QUERY':
             return {
                 ...state,
@@ -11,7 +15,7 @@ export default function reducer(state, action) {
         case 'REGAIN_VIDEOS':
             return {
                 ...state,
-                SearchResult:[]
+                SearchResult: []
             }
         case 'ADD_TO_HISTORY':
             let isAlreadyPresent = state.HistoryList.filter(item => item.id === action.payload.id)

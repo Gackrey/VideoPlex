@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import PlayListButton from './PlayListButton';
 import { useParams } from 'react-router-dom'
 import { useVideoContext } from '../Context/VideoContext';
 import YouTube from 'react-youtube';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faIndent, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { config } from '../config'
+import axios from 'axios'
 function ViewCalculator({ views }) {
     if (views > 1000000)
         return Math.round(views * 100 / 1000000) / 100 + 'M views'
@@ -13,6 +15,19 @@ function ViewCalculator({ views }) {
 }
 const VideoPlayer = () => {
     const { AllVideos, LikedList, WatchLater, dispatch } = useVideoContext();
+    async function getDateFromAPI() {
+        try {
+            const response = await axios.get(`${config.YOUTUBE_LINK}&key=${config.API_KEY}`);
+            dispatch({ type: "INITIALIZE_VIDEOS", payload: response.data.items })
+        }
+        catch (error) {
+            console.error("Error", error)
+        }
+    }
+
+    useEffect(() => {
+        AllVideos.length === 0 && getDateFromAPI()
+    }, []);
     const { videoId } = useParams();
     const [dislikeState, setDislikeState] = useState(false);
     const [dislikeColor, setDislikeColor] = useState('gray');
@@ -66,7 +81,7 @@ const VideoPlayer = () => {
             autoplay: 1,
         }
     };
-    // console.log(AllVideos,displayedVideo);
+    console.log(AllVideos, displayedVideo);
     const [saveClick, setSaveState] = useState({ screen: "none", box: "none" });
     return (
         <div style={{ textAlign: "start" }}>
