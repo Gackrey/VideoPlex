@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useVideoContext } from '../Context/VideoContext';
-import { VideoCard_Library_normal,VideoCard_Library_playlist } from './VideoCard_Library'
+import { VideoCard_Library_normal,VideoCard_Library_playlist } from '../Components/VideoCard_Library'
 import { Link } from 'react-router-dom'
 const Library = () => {
     const { HistoryList, Playlist, WatchLater, LikedList } = useVideoContext();

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PlayListButton from './PlayListButton';
+import PlayListButton from '../Components/PlayListButton';
 import { useParams } from 'react-router-dom'
 import { useVideoContext } from '../Context/VideoContext';
 import YouTube from 'react-youtube';

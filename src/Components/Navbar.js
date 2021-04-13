@@ -7,7 +7,7 @@ const Navbar = () => {
   const { AllVideos, dispatch } = useVideoContext();
   const [searchContent, setSearchContent] = useState('')
   function searchHandler() {
-    dispatch({ type: "SEARCH_QUERY", payload: {All:AllVideos ,query:searchContent} });
+    dispatch({ type: "SEARCH_QUERY", payload: { All: AllVideos, query: searchContent } });
     setSearchContent("");
   }
   return (
@@ -54,7 +54,9 @@ const Navbar = () => {
         )}
         <div style={{ display: "flex", alignItems: "center" }}>
           <i className="fa fa-bell bell-icon" aria-hidden="true"></i>
-          <img className="avatar-small" style={{ border: "none" }} src={user} alt="" />
+          <div class="avatar-text">
+            <span>G</span>
+          </div>
         </div>
       </div>
       {window.innerWidth < 610 ? (

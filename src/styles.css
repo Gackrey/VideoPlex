@@ -177,7 +177,7 @@ nav{
     position: fixed;
     width: 100%;
     z-index: 1;
-    background-color: #cce5ff;
+    background-color: var(--primary);
     bottom: 0;
     top: inherit;
     height: fit-content;
