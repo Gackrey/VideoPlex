@@ -45,7 +45,7 @@ export default function reducer(state, action) {
             return { ...state, Playlist: { ...state.Playlist, [action.payload]: [] } }
         case 'DELETE_PLAYLIST':
             delete state.Playlist[action.payload]
-            return state;
+            return {...state};
         case 'ADD_TO_PLAYLIST':
             return {
                 ...state,

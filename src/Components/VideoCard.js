@@ -19,7 +19,7 @@ function ViewCalculator({ views }) {
     else
         return Math.round(views * 100 / 1000) / 100 + 'k views'
 }
-const VideoCard = ({ videos,list }) => {
+const VideoCard = ({ videos, list }) => {
     const { dispatch } = useVideoContext();
     return (
         <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -37,7 +37,7 @@ const VideoCard = ({ videos,list }) => {
                                     </div>
                                 </Link>
                                 <FontAwesomeIcon icon={faTrash}
-                                    style={{ color: "GrayText", fontSize: "23px" }}
+                                    style={{ color: "red", fontSize: "23px", position: "absolute", top: "10px", right: "16px" }}
                                     onClick={() => dispatch({
                                         type: "REMOVE_FROM_PLAYLIST", payload: {
                                             name: list,

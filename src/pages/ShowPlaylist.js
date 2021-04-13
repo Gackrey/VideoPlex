@@ -2,19 +2,19 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useVideoContext } from '../Context/VideoContext'
-import VideoCard from './VideoCard'
-export function ShowPlayList() {
+import VideoCard from '../Components/VideoCard'
+const ShowPlayList = () => {
     const { Playlist, dispatch } = useVideoContext();
     const playlistKeys = Object.keys(Playlist);
-    return (Object.keys(Playlist).length > 0 ?
+    return (
         <div>
-            {
+            {playlistKeys.length > 0 ?
                 playlistKeys.map(item => {
                     return (
-                        <div>
+                        <div key={item}>
                             <h1>{item}
                                 <FontAwesomeIcon icon={faTrash}
-                                    style={{ marginLeft: "10px" }}
+                                    style={{ marginLeft: "10px",cursor:"pointer" }}
                                     onClick={() => dispatch({ type: "DELETE_PLAYLIST", payload: item })} />
                             </h1>
                             <br />
@@ -26,8 +26,10 @@ export function ShowPlayList() {
                         </div>
                     )
                 })
+                : <h1>No Playlist Available</h1>
             }
         </div>
-        : <h1>No Playlist Available</h1>
     )
 }
+
+export default ShowPlayList;

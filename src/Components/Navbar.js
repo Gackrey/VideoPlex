@@ -54,7 +54,7 @@ const Navbar = () => {
         )}
         <div style={{ display: "flex", alignItems: "center" }}>
           <i className="fa fa-bell bell-icon" aria-hidden="true"></i>
-          <div class="avatar-text">
+          <div className="avatar-text">
             <span>G</span>
           </div>
         </div>

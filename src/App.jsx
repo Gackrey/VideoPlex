@@ -1,7 +1,7 @@
 import "./styles.css";
 import { Routes, Route } from 'react-router-dom'
 import { AllVideosListing } from './pages/AllVideos'
-import { ShowPlayList } from './Components/ShowPlaylist'
+import  ShowPlayList  from './pages/ShowPlaylist'
 import Liked from './pages/Liked'
 import { NotFound } from './pages/NotFound'
 import WatchLater from './pages/WatchLater'

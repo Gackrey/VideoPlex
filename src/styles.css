@@ -91,6 +91,7 @@ nav{
   width: min-content;
   cursor: pointer;
   padding: 5px;
+  position: relative;
 }
 .videoCard:hover{
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -130,7 +131,7 @@ nav{
 }
 .library_body{
   display: flex;
-  align-items: center;
+  align-items: baseline;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
@@ -206,5 +207,10 @@ nav{
   }
   .library{
     width: 86%;
+    margin-bottom: 4rem;
+  }
+  .library_body{
+    flex-wrap:nowrap;
+    overflow: scroll;
   }
 }
