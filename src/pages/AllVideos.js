@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useVideoContext } from '../Context/VideoContext';
+import { LazyLoadImage  } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css';
 function ViewCalculator({ views }) {
     if (views > 1000000)
         return Math.round(views * 100 / 1000000) / 100 + 'M views'
@@ -26,7 +28,11 @@ export function AllVideosListing() {
                     <div key={video.id} >
                         <Link to={`/video/${video.id}`} style={{ textDecoration: "none" }}>
                             <div className="videoCard" >
-                                <img src={video.snippet.thumbnails.medium.url} style={{ width: "300px" }} alt="" />
+                                <LazyLoadImage
+                                    src={video.snippet.thumbnails.medium.url}
+                                    alt="Loading...."
+                                    effect="blur"
+                                    width="300px" />
                                 <div style={{ marginLeft: "10px" }}>
                                     <p style={{ textAlign: "start", color: "black" }}>{video.snippet.title}</p>
                                     <p style={{ marginTop: "10px", textAlign: "start", color: "GrayText" }}>{video.snippet.channelTitle}</p>
@@ -36,12 +42,16 @@ export function AllVideosListing() {
                         </Link>
                     </div>
                 )
-            }):AllVideos.map(video => {
+            }) : AllVideos.map(video => {
                 return (
                     <div key={video.id} >
                         <Link to={`/video/${video.id}`} style={{ textDecoration: "none" }}>
                             <div className="videoCard" >
-                                <img src={video.snippet.thumbnails.medium.url} style={{ width: "300px" }} alt="" />
+                            <LazyLoadImage
+                            src={video.snippet.thumbnails.medium.url}
+                            alt="Loading...."
+                            effect="blur"
+                            width="300px" />
                                 <div style={{ marginLeft: "10px" }}>
                                     <p style={{ textAlign: "start", color: "black" }}>{video.snippet.title}</p>
                                     <p style={{ marginTop: "10px", textAlign: "start", color: "GrayText" }}>{video.snippet.channelTitle}</p>
@@ -52,7 +62,7 @@ export function AllVideosListing() {
                     </div>
                 )
             })
-        }
+            }
         </div>
     )
 }
