@@ -4,12 +4,15 @@ import { AllVideosListing } from './pages/AllVideos'
 import  ShowPlayList  from './pages/ShowPlaylist'
 import Liked from './pages/Liked'
 import { NotFound } from './pages/NotFound'
+import Login from './pages/Login';
+import SignUp from './pages/SignUp'
 import WatchLater from './pages/WatchLater'
 import VideoPlayer from './pages/VideoPlayer'
 import Navbar from './Components/Navbar'
 import SideBar from './Components/SideBar'
 import Library from './pages/Library'
 import History from './pages/History'
+import {PrivateRoute} from './PrivateRoute'
 import { config } from './config';
 import axios from 'axios'
 import { useVideoContext } from './Context/VideoContext'
@@ -39,11 +42,13 @@ export default function App() {
         <Routes>
           <Route path='/video/:videoId' exact element={<VideoPlayer />} />
           <Route path='/' element={<AllVideosListing />} />
-          <Route path='/playlist' element={<ShowPlayList />} />
-          <Route path='/watch-later' element={<WatchLater />} />
-          <Route path='/library' element={<Library />} />
-          <Route path='/history' element={<History />} />
-          <Route path='/liked' element={<Liked />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<SignUp />} />
+          <PrivateRoute path='/playlist' element={<ShowPlayList />} />
+          <PrivateRoute path='/watch-later' element={<WatchLater />} />
+          <PrivateRoute path='/library' element={<Library />} />
+          <PrivateRoute path='/history' element={<History />} />
+          <PrivateRoute path='/liked' element={<Liked />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </div>
