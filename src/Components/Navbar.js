@@ -6,7 +6,13 @@ import { useVideoContext } from '../Context/VideoContext';
 const Navbar = () => {
   const { AllVideos, dispatch } = useVideoContext();
   const [searchContent, setSearchContent] = useState('')
-  function searchHandler() {
+  function searchHandler(e) {
+    if (e.keyCode === 13) {
+    dispatch({ type: "SEARCH_QUERY", payload: { All: AllVideos, query: searchContent } });
+    setSearchContent("");
+    }
+  }
+  function btnsearchHandler(){
     dispatch({ type: "SEARCH_QUERY", payload: { All: AllVideos, query: searchContent } });
     setSearchContent("");
   }
@@ -26,9 +32,10 @@ const Navbar = () => {
               placeholder="Search"
               value={searchContent}
               onChange={(e) => setSearchContent(e.target.value)}
+              onKeyDown={searchHandler}
             ></input>
             <button
-              onClick={searchHandler}
+              onClick={btnsearchHandler}
             >
               <svg
                 width="20"
@@ -68,7 +75,7 @@ const Navbar = () => {
             onChange={(e) => setSearchContent(e.target.value)}
           ></input>
           <button
-            onClick={searchHandler}
+            onClick={btnsearchHandler}
           >
             <svg
               width="20"

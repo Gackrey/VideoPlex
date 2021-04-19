@@ -9,6 +9,7 @@ export function VideoProvider({ children }) {
         HistoryList: [],
         LikedList: [],
         SearchResult:[],
+        isSearched:false
     })
     return (
         <VideoContext.Provider
@@ -19,6 +20,7 @@ export function VideoProvider({ children }) {
                 HistoryList: state.HistoryList,
                 LikedList: state.LikedList,
                 SearchResult:state.SearchResult,
+                isSearched:state.isSearched,
                 dispatch
             }}>
             {children}

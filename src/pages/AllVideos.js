@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useVideoContext } from '../Context/VideoContext';
-import { LazyLoadImage  } from 'react-lazy-load-image-component'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css';
 function ViewCalculator({ views }) {
     if (views > 1000000)
@@ -20,48 +20,51 @@ function DateCalculator({ date }) {
         return Math.ceil(timeElapsed_inhours / 24) + ' days ago'
 }
 export function AllVideosListing() {
-    const { AllVideos, SearchResult } = useVideoContext();
+    const { AllVideos, SearchResult, isSearched } = useVideoContext();
     return (
         <div className="AllVideos">
-            {SearchResult.length > 0 ? SearchResult.map(video => {
-                return (
-                    <div key={video.id} >
-                        <Link to={`/video/${video.id}`} style={{ textDecoration: "none" }}>
-                            <div className="videoCard" >
-                                <LazyLoadImage
-                                    src={video.snippet.thumbnails.medium.url}
-                                    alt="Loading...."
-                                    effect="blur"
-                                    width="300px" />
-                                <div style={{ marginLeft: "10px" }}>
-                                    <p style={{ textAlign: "start", color: "black" }}>{video.snippet.title}</p>
-                                    <p style={{ marginTop: "10px", textAlign: "start", color: "GrayText" }}>{video.snippet.channelTitle}</p>
-                                    <p style={{ textAlign: "start", color: "GrayText" }}>{<ViewCalculator views={video.statistics.viewCount} />} . {<DateCalculator date={video.snippet.publishedAt} />}</p>
-                                </div>
+            {isSearched > 0 ? (
+                SearchResult.length > 0 ?
+                    SearchResult.map(video => {
+                        return (
+                            <div key={video.id} >
+                                <Link to={`/video/${video.id}`} style={{ textDecoration: "none" }}>
+                                    <div className="videoCard" >
+                                        <LazyLoadImage
+                                            src={video.snippet.thumbnails.medium.url}
+                                            alt="Loading...."
+                                            effect="blur"
+                                            width="300px" />
+                                        <div style={{ marginLeft: "10px" }}>
+                                            <p style={{ textAlign: "start", color: "black" }}>{video.snippet.title}</p>
+                                            <p style={{ marginTop: "10px", textAlign: "start", color: "GrayText" }}>{video.snippet.channelTitle}</p>
+                                            <p style={{ textAlign: "start", color: "GrayText" }}>{<ViewCalculator views={video.statistics.viewCount} />} . {<DateCalculator date={video.snippet.publishedAt} />}</p>
+                                        </div>
+                                    </div>
+                                </Link>
                             </div>
-                        </Link>
-                    </div>
-                )
-            }) : AllVideos.map(video => {
-                return (
-                    <div key={video.id} >
-                        <Link to={`/video/${video.id}`} style={{ textDecoration: "none" }}>
-                            <div className="videoCard" >
-                            <LazyLoadImage
-                            src={video.snippet.thumbnails.medium.url}
-                            alt="Loading...."
-                            effect="blur"
-                            width="300px" />
-                                <div style={{ marginLeft: "10px" }}>
-                                    <p style={{ textAlign: "start", color: "black" }}>{video.snippet.title}</p>
-                                    <p style={{ marginTop: "10px", textAlign: "start", color: "GrayText" }}>{video.snippet.channelTitle}</p>
-                                    <p style={{ textAlign: "start", color: "GrayText" }}>{<ViewCalculator views={video.statistics.viewCount} />} . {<DateCalculator date={video.snippet.publishedAt} />}</p>
-                                </div>
+                        )
+                    }):<h1>No Videos Found</h1>
+                    ) : AllVideos.map(video => {
+                        return (
+                            <div key={video.id} >
+                                <Link to={`/video/${video.id}`} style={{ textDecoration: "none" }}>
+                                    <div className="videoCard" >
+                                        <LazyLoadImage
+                                            src={video.snippet.thumbnails.medium.url}
+                                            alt="Loading...."
+                                            effect="blur"
+                                            width="300px" />
+                                        <div style={{ marginLeft: "10px" }}>
+                                            <p style={{ textAlign: "start", color: "black" }}>{video.snippet.title}</p>
+                                            <p style={{ marginTop: "10px", textAlign: "start", color: "GrayText" }}>{video.snippet.channelTitle}</p>
+                                            <p style={{ textAlign: "start", color: "GrayText" }}>{<ViewCalculator views={video.statistics.viewCount} />} . {<DateCalculator date={video.snippet.publishedAt} />}</p>
+                                        </div>
+                                    </div>
+                                </Link>
                             </div>
-                        </Link>
-                    </div>
-                )
-            })
+                        )
+                    })
             }
         </div>
     )
