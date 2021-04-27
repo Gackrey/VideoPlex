@@ -69,14 +69,14 @@ const VideoPlayer = () => {
             autoplay: 1,
         }
     };
-    console.log(AllVideos, displayedVideo);
     const [saveClick, setSaveState] = useState({ screen: "none", box: "none" });
     const [loginClick, setLoginState] = useState({ screen: "none", box: "none" });
     return (
         displayedVideo ?
-            <div style={{ textAlign: "start" }}>
+            <div className="videoplayer" style={{ textAlign: "start" }}>
                 <PlayListButton state={saveClick} video={displayedVideo} />
                 <RedirectBox state={loginClick} />
+                <br/>
                 <YouTube videoId={displayedVideo.id} opts={opts}
                     onPlay={() => dispatch({ type: "ADD_TO_HISTORY", payload: displayedVideo })} />
                 <p className="title">{displayedVideo.snippet.title}</p>

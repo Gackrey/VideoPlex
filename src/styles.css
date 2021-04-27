@@ -1,11 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+html[data-theme=light] {
+  --background-color: #fff;
+  --alternate-background-colour: #f7f7f9;
+  --text-color: rgba(18,20,22,0.85);
+  --text-color-light: rgba(119,118,118,0.73);
+}
+html[data-theme=dark] {
+  --background-color: #212a2e;
+  --alternate-background-colour: #263238;
+  --text-color: #f7f8f8; 
+  --text-color-light: #8a8f98;
+}
 *{
   margin: 0;
   padding: 0;
 }
 .App {
   font-family: sans-serif;
+  background-color: var(--background-color);
   text-align: center;
+}
+input{
+  background-color: var(--alternate-background-color);
+  color: var(--text-color);
 }
 .logo_icon{
   width: 50px;
@@ -15,11 +32,13 @@
   grid-template-columns: 1fr 5.5fr;
 }
 nav{
-  background-color: white;
+  background-color: var(--background-color);
   position: sticky;
   top: 0;
+  width: 100%;
+  padding: 3px 0;
   z-index: 1;
-  border-bottom: 2px solid black;
+  box-shadow: 0 8px 6px -6px black;
 }
 .nav-body{
   display: flex;
@@ -29,7 +48,7 @@ nav{
   margin: auto;
 }
 .logoHeading {
-  color: black;
+  color: var( --text-color);
   font-size: 1.8rem;
   font-family: 'Rubik', sans-serif;
 }
@@ -40,7 +59,8 @@ nav{
   width: 40vw;
   height: 2.1rem;
   border-radius: 3px;
-  background-color: white;
+  background-color: var(--alternate-background-colour);
+  color: var(--text-color);
   border: 1px solid rgba(0, 0, 0, 0.35);
 }
 .Search > input {
@@ -62,6 +82,7 @@ nav{
   padding-right: 3rem;
 }
 .sidebar{
+  background-color: var(--background-color);
   padding: 10px;
   width: fit-content;
   height: 84vh;
@@ -71,7 +92,7 @@ nav{
 }
 .sidebar_element {
   font-size: 20px;
-  color: var(--secondary);
+  color: var(--text-color);
   text-align: start;
   padding: 14px 0px;
 }
@@ -83,16 +104,27 @@ nav{
   color: thistle;
 }
 .AllVideos{
+  background-color: var(--background-color);
+  color: var(--text-color);
   margin-top: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 1rem 0;
 }
 .videoCard{
+  background-color: var(--alternate-background-colour);
+  color: var(--text-color);
   width: min-content;
   cursor: pointer;
   padding: 5px;
   position: relative;
+  margin: 5px;
+}
+.videoCard-playlist-text{
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+  color: var(--text-color);
 }
 .videoCard:hover{
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -149,6 +181,8 @@ nav{
   width: 100%;
 }
 .Login-container{
+  background-color: var(--background-color);
+  color: var(--text-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,6 +198,8 @@ nav{
 }
 .input-box-text{
   margin: 10px 10px;
+  background-color: var(--alternate-background-colour);
+  color: var(--text-color);
 }
 .input-box-text > input{
   padding: 10px;
@@ -178,6 +214,8 @@ nav{
   align-items: center;
   border: 1px solid black;
   margin:10px;
+  background-color: var(--alternate-background-colour);
+  color: var(--text-color);
 }
 .input-box-password > input{
   padding: 10px;
@@ -223,7 +261,8 @@ nav{
 .inner-pbox,.inner-rbox{
   margin: 0 1rem;
   padding: 1rem 2rem;
-  background-color: white;
+  background-color: var(--alternate-background-colour);
+  color: var(--text-color);
   pointer-events: all;
 }
 .btn-rbox{
@@ -238,6 +277,25 @@ nav{
   background-color: rgb(19, 19, 94);
   color: white;
 }
+.blank-page-text{
+  color: var(--text-color);
+}
+.history,.liked,.videoplayer{
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+.history-box,.watch-box,.liked-box{
+  background-color: var(--alternate-background-colour);
+  color: var(--text-color);
+  display: flex;
+  margin: 10px;
+  border: 1px solid black;
+  padding: 10px;
+}
+.box-body{
+  margin-left: 10px;
+  color: var(--text-color);
+}
 @media only screen and (max-width: 768px) {
   .mainPreview,.AllVideos{
     display: flex;
@@ -246,12 +304,10 @@ nav{
   }
   nav{
     height: 6rem;
-    background-color: var(--primaryback);
   }
   .Search {
     align-items: center;
     justify-content: center;
-    background-color: white;
     width: 90vw;
     height: 2.1rem;
     margin: auto;
@@ -269,7 +325,6 @@ nav{
     position: fixed;
     width: 100%;
     z-index: 1;
-    background-color: var(--primary);
     bottom: 0;
     top: inherit;
     height: fit-content;

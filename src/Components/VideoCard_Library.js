@@ -11,9 +11,9 @@ export function VideoCard_Library_normal({ video }) {
                         <img src={video.snippet.thumbnails.default.url} alt="" /> :
                         <img src={video.snippet.thumbnails.medium.url} style={{ width: "300px" }} alt="" />
                     }
-                    <div style={{ marginLeft: "10px" }}>
-                        <p style={{ textAlign: "start", color: "black" }}>{video.snippet.title}</p>
-                        <p style={{ marginTop: "10px", textAlign: "start", color: "GrayText" }}>{video.snippet.channelTitle}</p>
+                    <div className="box-body">
+                        <p style={{ textAlign: "start" }}>{video.snippet.title}</p>
+                        <p style={{ marginTop: "10px", textAlign: "start" }}>{video.snippet.channelTitle}</p>
                     </div>
                 </div>
             </Link>
@@ -35,13 +35,11 @@ export function VideoCard_Library_playlist({ name, playlist }) {
                         }
                             <p style={{
                                 textAlign: "start",
-                                color: "black",
                                 fontSize: "20px",
                                 fontWeight: "bold",
-                                textAlign: "center"
                             }}>{name}</p>
                     </div>
                 </Link>
-            </div> : <p style={{textAlign:"center",width:"100%",fontSize:"20px"}}>No videos in playlists found</p>
+            </div> : <p className="videoCard-playlist-text">No videos in playlists found</p>
     );
 }

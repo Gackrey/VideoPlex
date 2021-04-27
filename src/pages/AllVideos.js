@@ -35,10 +35,10 @@ export function AllVideosListing() {
                                             alt="Loading...."
                                             effect="blur"
                                             width="300px" />
-                                        <div style={{ marginLeft: "10px" }}>
-                                            <p style={{ textAlign: "start", color: "black" }}>{video.snippet.title}</p>
-                                            <p style={{ marginTop: "10px", textAlign: "start", color: "GrayText" }}>{video.snippet.channelTitle}</p>
-                                            <p style={{ textAlign: "start", color: "GrayText" }}>{<ViewCalculator views={video.statistics.viewCount} />} . {<DateCalculator date={video.snippet.publishedAt} />}</p>
+                                        <div className="box-body">
+                                            <p style={{ textAlign: "start"}}>{video.snippet.title}</p>
+                                            <p style={{ marginTop: "10px", textAlign: "start"}}>{video.snippet.channelTitle}</p>
+                                            <p style={{ textAlign: "start"}}>{<ViewCalculator views={video.statistics.viewCount} />} . {<DateCalculator date={video.snippet.publishedAt} />}</p>
                                         </div>
                                     </div>
                                 </Link>
@@ -55,10 +55,10 @@ export function AllVideosListing() {
                                             alt="Loading...."
                                             effect="blur"
                                             width="300px" />
-                                        <div style={{ marginLeft: "10px" }}>
-                                            <p style={{ textAlign: "start", color: "black" }}>{video.snippet.title}</p>
-                                            <p style={{ marginTop: "10px", textAlign: "start", color: "GrayText" }}>{video.snippet.channelTitle}</p>
-                                            <p style={{ textAlign: "start", color: "GrayText" }}>{<ViewCalculator views={video.statistics.viewCount} />} . {<DateCalculator date={video.snippet.publishedAt} />}</p>
+                                        <div className="box-body">
+                                            <p style={{ textAlign: "start" }}>{video.snippet.title}</p>
+                                            <p style={{ marginTop: "10px", textAlign: "start"}}>{video.snippet.channelTitle}</p>
+                                            <p style={{ textAlign: "start" }}>{<ViewCalculator views={video.statistics.viewCount} />} . {<DateCalculator date={video.snippet.publishedAt} />}</p>
                                         </div>
                                     </div>
                                 </Link>

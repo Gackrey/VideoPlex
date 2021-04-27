@@ -2,16 +2,29 @@ import React, { useState } from 'react';
 import play from '../Img/play.png'
 import { Link } from 'react-router-dom'
 import { useVideoContext } from '../Context/VideoContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 const Navbar = () => {
   const { AllVideos, dispatch } = useVideoContext();
   const [searchContent, setSearchContent] = useState('')
-  function searchHandler(e) {
-    if (e.keyCode === 13) {
-    dispatch({ type: "SEARCH_QUERY", payload: { All: AllVideos, query: searchContent } });
-    setSearchContent("");
+  const [theme, setTheme] = useState('light');
+  function themeHandler() {
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'dark')
+      setTheme('dark')
+    }
+    else {
+      document.documentElement.setAttribute('data-theme', 'light')
+      setTheme('light')
     }
   }
-  function btnsearchHandler(){
+  function searchHandler(e) {
+    if (e.keyCode === 13) {
+      dispatch({ type: "SEARCH_QUERY", payload: { All: AllVideos, query: searchContent } });
+      setSearchContent("");
+    }
+  }
+  function btnsearchHandler() {
     dispatch({ type: "SEARCH_QUERY", payload: { All: AllVideos, query: searchContent } });
     setSearchContent("");
   }
@@ -58,8 +71,21 @@ const Navbar = () => {
           </div>) : (
           ""
         )}
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <i className="fa fa-bell bell-icon" aria-hidden="true"></i>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{
+            backgroundColor: "white",
+            padding: "10px",
+            border: "1px solid var(--primary)",
+            borderRadius: "50%",
+            margin: "0 1rem"
+          }}
+          onClick={themeHandler}
+          >
+            <FontAwesomeIcon
+              icon={theme === 'light' ? faSun : faMoon}
+              style={{ color: "var(--primary)" }}
+            />
+          </div>
           <div className="avatar-text">
             <span>G</span>
           </div>

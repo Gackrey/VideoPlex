@@ -29,7 +29,7 @@ const PlayListButton = ({ state, video }) => {
                         fontSize: "18px",
                         border: "none",
                         outline: "none",
-                        backgroundColor: "white"
+                        backgroundColor: "transparent"
                     }}
                         onClick={() => { setBoxDisplay('none'), setScreenDisplay('none') }}
                     >X</button>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { faTrash, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useVideoContext } from '../Context/VideoContext';
@@ -6,19 +6,20 @@ import { Link } from 'react-router-dom'
 const Liked = () => {
     const { LikedList, dispatch } = useVideoContext();
     return (LikedList.length>0?
-        <div>
+        <div className=" liked">
+        <br/>
         <p style={{textAlign:"start", fontSize:"20px",fontWeight:"bold",color:"GrayText"}}>
         Liked ({LikedList.length} {LikedList.length>1?'videos':'video'})
         </p>
             {LikedList.map(liked => {
                 return (
-                    <div style={{ display: "flex", margin: "10px",border:"1px solid black",padding:"10px"  }}>
+                    <div key={liked.id} className="liked-box">
                         <Link to={`/video/${liked.id}`} style={{ textDecoration: "none"}}>
                             <div style={{ display: "flex" }}>
                                 <img src={liked.snippet.thumbnails.default.url} alt="" />
-                                <div style={{ marginLeft: "10px" }}>
-                                    <p style={{ textAlign: "start", color: "black" }}>{liked.snippet.title}</p>
-                                    <p style={{ marginTop: "10px", textAlign: "start", color: "GrayText" }}>{liked.snippet.channelTitle}</p>
+                                <div className="box-body">
+                                    <p style={{ textAlign: "start" }}>{liked.snippet.title}</p>
+                                    <p style={{ marginTop: "10px", textAlign: "start" }}>{liked.snippet.channelTitle}</p>
                                 </div>
                             </div>
                         </Link>
@@ -27,7 +28,9 @@ const Liked = () => {
                     </div>
                 )
             })}
-        </div>:<h1>No Liked videos yet!</h1>
+        </div>:<h1 style={{
+            height:window.innerWidth < 610 ? `${window.innerHeight-102}px` : `${window.innerHeight-57}px`
+        }} className="blank-page-text">No Liked videos yet!</h1>
     )
 }
 

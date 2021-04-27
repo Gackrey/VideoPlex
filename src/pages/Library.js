@@ -13,7 +13,7 @@ const Library = () => {
     const { HistoryList, Playlist, WatchLater, LikedList } = useVideoContext();
     const playlistKeys = Object.keys(Playlist)
     return (
-        <div className="library">
+        <div>
             <div className="library_heading">
                 <p style={{ textAlign: "start", fontSize: "20px", fontWeight: "bold", color: "GrayText" }}>
                     <FontAwesomeIcon icon={faHistory} />
@@ -27,7 +27,7 @@ const Library = () => {
             {
                 HistoryList.length>0?
                 HistoryList.map(history => <VideoCard_Library_normal video= {history} />):
-                <p style={{textAlign:"center",width:"100%",fontSize:"20px"}}>No History found</p>
+                <p className="videoCard-playlist-text">No History found</p>
             }
             </div>
             <div className="library_heading">
@@ -43,7 +43,7 @@ const Library = () => {
             {
                 WatchLater.length>0?
                 WatchLater.map(watch => <VideoCard_Library_normal video= {watch} />):
-                <p style={{textAlign:"center",width:"100%",fontSize:"20px"}}>You are all caught up</p>
+                <p className="videoCard-playlist-text">You are all caught up</p>
             }
             </div>
             <div className="library_heading">
@@ -59,7 +59,7 @@ const Library = () => {
             {
                 playlistKeys.length>0?
                 playlistKeys.map(watch => <VideoCard_Library_playlist name={watch} playlist={Playlist[watch]} />):
-                <p style={{textAlign:"center",width:"100%",fontSize:"20px"}}>No playlist found</p>
+                <p className="videoCard-playlist-text">No playlist found</p>
             }
             </div>
             <div className="library_heading">
@@ -75,7 +75,7 @@ const Library = () => {
             {
                 LikedList.length>0?
                 LikedList.map(liked => <VideoCard_Library_normal video= {liked} />):
-                <p style={{textAlign:"center",width:"100%",fontSize:"20px"}}>No liked videos found</p>
+                <p className="videoCard-playlist-text">No liked videos found</p>
             }
             </div>
         </div>

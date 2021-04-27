@@ -4,7 +4,7 @@ export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
     // const navigate = useNavigate();
-    const [isUserLogin, setLogin] = useState(false);
+    const [isUserLogin, setLogin] = useState(true);
     useEffect(() => {
         const loginStatus = JSON.parse(localStorage?.getItem("VideoAuthDetails"));
         loginStatus?.isUserLoggedIn && setLogin(true);

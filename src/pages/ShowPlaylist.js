@@ -12,21 +12,24 @@ const ShowPlayList = () => {
                 playlistKeys.map(item => {
                     return (
                         <div key={item}>
-                            <h1>{item}
+                            <br />
+                            <h1 className="blank-page-text">{item}
                                 <FontAwesomeIcon icon={faTrash}
-                                    style={{ marginLeft: "10px",cursor:"pointer" }}
+                                    style={{ marginLeft: "10px", cursor: "pointer" }}
                                     onClick={() => dispatch({ type: "DELETE_PLAYLIST", payload: item })} />
                             </h1>
                             <br />
                             {
-                                Playlist[item].length > 0 ? 
-                                <VideoCard list={item} videos={Playlist[item]} /> : 
-                                <p>No Videos in this playlist</p>
+                                Playlist[item].length > 0 ?
+                                    <VideoCard list={item} videos={Playlist[item]} /> :
+                                    <p className="blank-page-text">No Videos in this playlist</p>
                             }
                         </div>
                     )
                 })
-                : <h1>No Playlist Available</h1>
+                : <h1 style={{
+                    height: window.innerWidth < 610 ? `${window.innerHeight - 102}px` : `${window.innerHeight - 57}px`
+                }} className="blank-page-text">No Playlist Available</h1>
             }
         </div>
     )

@@ -30,10 +30,10 @@ const VideoCard = ({ videos, list }) => {
                             <div className="videoCard">
                                 <Link to={`/video/${video.id}`} style={{ textDecoration: "none" }}>
                                     <img src={video.snippet.thumbnails.medium.url} style={{ width: "300px" }} alt="" />
-                                    <div style={{ marginLeft: "10px" }}>
-                                        <p style={{ textAlign: "start", color: "black" }}>{video.snippet.title}</p>
-                                        <p style={{ marginTop: "10px", textAlign: "start", color: "GrayText" }}>{video.snippet.channelTitle}</p>
-                                        <p style={{ textAlign: "start", color: "GrayText" }}>{<ViewCalculator views={video.statistics.viewCount} />} . {<DateCalculator date={video.snippet.publishedAt} />}</p>
+                                    <div className="box-body">
+                                        <p style={{ textAlign: "start"}}>{video.snippet.title}</p>
+                                        <p style={{ marginTop: "10px", textAlign: "start" }}>{video.snippet.channelTitle}</p>
+                                        <p style={{ textAlign: "start"}}>{<ViewCalculator views={video.statistics.viewCount} />} . {<DateCalculator date={video.snippet.publishedAt} />}</p>
                                     </div>
                                 </Link>
                                 <FontAwesomeIcon icon={faTrash}
