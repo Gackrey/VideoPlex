@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import user from '../Img/user.jpg'
 import play from '../Img/play.png'
 import { Link } from 'react-router-dom'
 import { useVideoContext } from '../Context/VideoContext';

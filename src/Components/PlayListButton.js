@@ -19,19 +19,8 @@ const PlayListButton = ({ state, video }) => {
         setScreenDisplay(state.screen)
     }, [state]);
     return (
-        <div style={{
-            position: "absolute",
-            top: "0",
-            left: "0",
-            display: ScreenDisplay,
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            height: "100vh",
-            backgroundColor: "transparent",
-            pointerEvents: "none",
-        }}>
-            <div style={{ backgroundColor: "white", pointerEvents: "all", display: boxDisplay }}>
+        <div className="playlistbox" style={{display: ScreenDisplay}}>
+            <div className="inner-pbox" style={{ display: boxDisplay }}>
                 <div style={{ padding: "5px 10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <p>Save to...</p>
                     <button style={{

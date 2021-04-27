@@ -8,23 +8,23 @@ const Login = () => {
     const [showpasswordState, setPassState] = useState(false)
     return (
         <div className="Login-container">
-            <div className="Login-box">
+            <form className="Login-box">
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <h1>Log </h1>
                     <h1 style={{ color: "var(--primary)" }}>IN</h1>
                 </div>
                 <div className="input-box-text">
-                    <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+                    <input type="text" required placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div className="input-box-password">
-                    <input type={showpasswordState ? "text" : "password"} placeholder="Password"
+                    <input type={showpasswordState ? "text" : "password"} required placeholder="Password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <div className="password-state" onClick={() => setPassState(!showpasswordState)}>
                         <FontAwesomeIcon icon={showpasswordState ? faEye : faEyeSlash} />
                     </div>
                 </div>
-                <button className="login-click-btn"
+                <button type="submit" className="login-click-btn"
                 // onClick={() => loginUserWithCredentials(username, password)}
                 >Log In</button>
                 <p style={{ fontWeight: "bold" }}>Dont have a account?
@@ -32,7 +32,7 @@ const Login = () => {
                         Sign Up</Link>
                 </p>
                 <br />
-            </div>
+            </form>
         </div>
     );
 }

@@ -208,6 +208,36 @@ nav{
   outline: none;
   cursor: pointer;
 }
+.playlistbox,.redirectbox{
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0,0,0,.8);
+  z-index: 5;
+  pointer-events: none;
+}
+.inner-pbox,.inner-rbox{
+  margin: 0 1rem;
+  padding: 1rem 2rem;
+  background-color: white;
+  pointer-events: all;
+}
+.btn-rbox{
+  border: 1px solid black;
+  outline: none;
+  padding: 5px 10px;
+  font-size: 18px;
+  color: rgb(19, 19, 94);
+  background-color: white;
+}
+.btn-rbox:hover{
+  background-color: rgb(19, 19, 94);
+  color: white;
+}
 @media only screen and (max-width: 768px) {
   .mainPreview,.AllVideos{
     display: flex;

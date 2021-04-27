@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import PlayListButton from '../Components/PlayListButton';
+import RedirectBox from '../Components/RedirectBox'
 import { useParams } from 'react-router-dom'
 import { useVideoContext } from '../Context/VideoContext';
+import { useAuth } from '../Context/AuthProvider';
 import YouTube from 'react-youtube';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faIndent, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +15,7 @@ function ViewCalculator({ views }) {
 }
 const VideoPlayer = () => {
     const { AllVideos, LikedList, WatchLater, dispatch } = useVideoContext();
+    const { isUserLogin } = useAuth()
     const { videoId } = useParams();
     const [dislikeState, setDislikeState] = useState(false);
     const [dislikeColor, setDislikeColor] = useState('gray');
@@ -68,48 +71,75 @@ const VideoPlayer = () => {
     };
     console.log(AllVideos, displayedVideo);
     const [saveClick, setSaveState] = useState({ screen: "none", box: "none" });
+    const [loginClick, setLoginState] = useState({ screen: "none", box: "none" });
     return (
-        displayedVideo?
-        <div style={{ textAlign: "start" }}>
-            <PlayListButton state={saveClick} video={displayedVideo} />
-            <YouTube videoId={displayedVideo.id} opts={opts}
-                onPlay={() => dispatch({ type: "ADD_TO_HISTORY", payload: displayedVideo })} />
-            <p className="title">{displayedVideo.snippet.title}</p>
-            <div className="detailArea">
-                <span style={{ textAlign: "start", color: "GrayText" }}>
-                    {<ViewCalculator views={displayedVideo.statistics.viewCount} />}
+        displayedVideo ?
+            <div style={{ textAlign: "start" }}>
+                <PlayListButton state={saveClick} video={displayedVideo} />
+                <RedirectBox state={loginClick} />
+                <YouTube videoId={displayedVideo.id} opts={opts}
+                    onPlay={() => dispatch({ type: "ADD_TO_HISTORY", payload: displayedVideo })} />
+                <p className="title">{displayedVideo.snippet.title}</p>
+                <div className="detailArea">
+                    <span style={{ textAlign: "start", color: "GrayText" }}>
+                        {<ViewCalculator views={displayedVideo.statistics.viewCount} />}
                     . {Date(displayedVideo.snippet.publishedAt).slice(3, 15)}
-                </span>
-                <div className="detailIconBox">
-                    <div style={{ display: "flex", borderBottom: "4px solid gray", marginRight: "10px" }}>
-                        <div style={{ margin: "0 10px", cursor: "pointer", color: likeColor }} onClick={() => likeCounter(displayedVideo)}>
-                            <FontAwesomeIcon icon={faThumbsUp} />
-                            {Math.ceil(displayedVideo.statistics.likeCount / 1000)}k
+                    </span>
+                    <div className="detailIconBox">
+                        <div style={{ display: "flex", borderBottom: "4px solid gray", marginRight: "10px" }}>
+                            <div style={{ margin: "0 10px", cursor: "pointer", color: likeColor }}
+                                onClick={() => {
+                                    if (isUserLogin)
+                                        likeCounter(displayedVideo)
+                                    else
+                                        setLoginState({ screen: "flex", box: "block" })
+                                }
+                                }>
+                                <FontAwesomeIcon icon={faThumbsUp} />
+                                {Math.ceil(displayedVideo.statistics.likeCount / 1000)}k
                         </div>
-                        <div style={{ cursor: "pointer", color: dislikeColor }} onClick={() => dislikeCounter(displayedVideo)}>
-                            <FontAwesomeIcon icon={faThumbsDown} />
-                            {Math.ceil(displayedVideo.statistics.dislikeCount / 1000)}k
+                            <div style={{ cursor: "pointer", color: dislikeColor }}
+                                onClick={() => {
+                                    if (isUserLogin)
+                                        dislikeCounter(displayedVideo)
+                                    else
+                                        setLoginState({ screen: "flex", box: "block" })
+                                }
+                                }>
+                                <FontAwesomeIcon icon={faThumbsDown} />
+                                {Math.ceil(displayedVideo.statistics.dislikeCount / 1000)}k
                         </div>
-                    </div>
-                    <div style={{ margin: "0 10px", cursor: "pointer", color: laterColor }}
-                        onClick={() => {
-                            dispatch({ type: "ADD_TO_WATCHLATER", payload: displayedVideo })
-                            setLaterState(true);
-                            setLaterColor('#007bff')
-                        }}>
-                        <FontAwesomeIcon icon={faClock} />
+                        </div>
+                        <div style={{ margin: "0 10px", cursor: "pointer", color: laterColor }}
+                            onClick={() => {
+                                if (isUserLogin) {
+                                    dispatch({ type: "ADD_TO_WATCHLATER", payload: displayedVideo })
+                                    setLaterState(true);
+                                    setLaterColor('#007bff')
+                                }
+                                else
+                                    setLoginState({ screen: "flex", box: "block" })
+                            }}>
+                            <FontAwesomeIcon icon={faClock} />
                           Watch Later
                     </div>
-                    <div style={{ margin: "0 10px", cursor: "pointer" }} onClick={() => setSaveState({ screen: "flex", box: "block" })}>
-                        <FontAwesomeIcon icon={faIndent} />
+                        <div style={{ margin: "0 10px", cursor: "pointer" }}
+                            onClick={() => {
+                                if (isUserLogin)
+                                    setSaveState({ screen: "flex", box: "block" })
+                                else
+                                    setLoginState({ screen: "flex", box: "block" })
+                            }
+                            }>
+                            <FontAwesomeIcon icon={faIndent} />
                         Save
                     </div>
+                    </div>
                 </div>
-            </div>
-            <hr />
-            <p style={{ fontWeight: "bold" }}>{displayedVideo.snippet.channelTitle}</p>
-            <p className="description">{displayedVideo.snippet.description}</p>
-        </div>:<div></div>
+                <hr />
+                <p style={{ fontWeight: "bold" }}>{displayedVideo.snippet.channelTitle}</p>
+                <p className="description">{displayedVideo.snippet.description}</p>
+            </div> : <div></div>
     );
 }
 

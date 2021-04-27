@@ -9,26 +9,26 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     return (
         <div className="Login-container">
-            <div className="Login-box">
+            <form className="Login-box">
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <h1>Sign </h1>
                     <h1 style={{ color: "var(--primary)" }}>UP</h1>
                 </div>
                 <div className="input-box-text">
-                    <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+                    <input type="text" required placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div className="input-box-text">
-                    <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" required placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className="input-box-password">
-                    <input type={showpasswordState ? "text" : "password"} placeholder="Password"
+                    <input type={showpasswordState ? "text" : "password"} required placeholder="Password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <div className="password-state" onClick={() => setPassState(!showpasswordState)}>
                         <FontAwesomeIcon icon={showpasswordState ? faEye : faEyeSlash} />
                     </div>
                 </div>
-                <button className="signup-click-btn"
+                <button type="submit" className="signup-click-btn"
                 // onClick={() => signinUser(username, email, password)}
                 >Sign Up</button>
                 <p style={{ fontWeight: "bold" }}>Already a member?
@@ -36,7 +36,7 @@ const SignUp = () => {
                         Log In</Link>
                 </p>
                 <br />
-            </div>
+            </form>
         </div>
     );
 }
