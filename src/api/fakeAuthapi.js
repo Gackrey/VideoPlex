@@ -55,7 +55,6 @@ export const updateUserApi = (oldname, oldpassword, name, email, password) => {
         reject({ success: false, status: 404 });
       }
       if (user?.password === password) {
-        console.log(Users);
         resolve({ success: true, data: user, status: 200 });
       }
       reject({ success: false, status: 401 });
