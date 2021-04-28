@@ -25,7 +25,6 @@ const Library = () => {
         if (!height)
             setHeight(0)
     }, []);
-    console.log("height:", height, "Const height:", constHeight);
 
     return (
         <div style={{

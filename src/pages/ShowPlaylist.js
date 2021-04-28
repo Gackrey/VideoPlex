@@ -19,7 +19,7 @@ const ShowPlayList = () => {
         if (!height)
             setHeight(0)
     }, []);
-    console.log(height);
+
     return (
         <div style={{
             marginBottom: "4rem",

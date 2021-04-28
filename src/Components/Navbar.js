@@ -9,15 +9,15 @@ const Navbar = () => {
   const { isUserLogin } = useAuth()
   const { AllVideos, dispatch } = useVideoContext();
   const [searchContent, setSearchContent] = useState('')
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
     const localtheme = localStorage?.getItem('theme')
     if (localtheme === 'light') {
-      setTheme('light')
+      setTheme('dark')
     }
     else {
-      setTheme('dark')
+      setTheme('light')
     }
   }, []);
 
