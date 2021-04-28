@@ -86,7 +86,6 @@ const PlayListButton = ({ state, video }) => {
                                 borderBottom: "1px solid black",
                                 display: "block",
                                 margin: "10px 0",
-                                color: "black",
                                 outline: "none"
                             }}
                             onChange={(e) => setPlaylistName(e.target.value)}

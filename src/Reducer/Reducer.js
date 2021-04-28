@@ -9,7 +9,7 @@ export default function reducer(state, action) {
                 ...state,
                 SearchResult:
                     action.payload.All.filter(item =>
-                        item.snippet.title.includes(action.payload.query)
+                        item.snippet.title.toLowerCase().includes(action.payload.query.toLowerCase())
                     ),
                 isSearched:true
             }

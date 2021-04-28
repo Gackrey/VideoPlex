@@ -139,6 +139,7 @@ const VideoPlayer = () => {
                 <hr />
                 <p style={{ fontWeight: "bold" }}>{displayedVideo.snippet.channelTitle}</p>
                 <p className="description">{displayedVideo.snippet.description}</p>
+                <br/>
             </div> : <div></div>
     );
 }

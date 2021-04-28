@@ -1,21 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import play from '../Img/play.png'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../Context/AuthProvider'
 import { useVideoContext } from '../Context/VideoContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faSun, faUser } from '@fortawesome/free-solid-svg-icons';
 const Navbar = () => {
+  const { isUserLogin } = useAuth()
   const { AllVideos, dispatch } = useVideoContext();
   const [searchContent, setSearchContent] = useState('')
   const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    const localtheme = localStorage?.getItem('theme')
+    if (localtheme === 'light') {
+      setTheme('light')
+    }
+    else {
+      setTheme('dark')
+    }
+  }, []);
+
   function themeHandler() {
     if (theme === 'light') {
       document.documentElement.setAttribute('data-theme', 'dark')
       setTheme('dark')
+      localStorage.setItem('theme', 'dark')
     }
     else {
       document.documentElement.setAttribute('data-theme', 'light')
       setTheme('light')
+      localStorage.setItem('theme', 'light')
     }
   }
   function searchHandler(e) {
@@ -79,16 +94,22 @@ const Navbar = () => {
             borderRadius: "50%",
             margin: "0 1rem"
           }}
-          onClick={themeHandler}
+            onClick={themeHandler}
           >
             <FontAwesomeIcon
-              icon={theme === 'light' ? faSun : faMoon}
+              icon={theme === 'light' ? faMoon : faSun}
               style={{ color: "var(--primary)" }}
             />
           </div>
-          <div className="avatar-text">
-            <span>G</span>
-          </div>
+          {isUserLogin ?
+            <Link to="/userdetails" style={{ textDecoration: "none" }}>
+              <div className="avatar-circleIcon">
+                <span><FontAwesomeIcon icon={faUser} /></span>
+              </div>
+            </Link> :
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              <button className="login-btn">Login</button>
+            </Link>}
         </div>
       </div>
       {window.innerWidth < 610 ? (

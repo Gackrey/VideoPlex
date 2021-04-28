@@ -12,6 +12,7 @@ import Navbar from './Components/Navbar'
 import SideBar from './Components/SideBar'
 import Library from './pages/Library'
 import History from './pages/History'
+import UserDetails from './pages/userDetails'
 import {PrivateRoute} from './PrivateRoute'
 import { config } from './config';
 import axios from 'axios'
@@ -31,6 +32,10 @@ export default function App() {
   }
 
   useEffect(() => {
+    const theme = localStorage?.getItem('theme')
+    if(theme){
+      document.documentElement.setAttribute('data-theme', theme)
+    }
     AllVideos.length === 0 && getDateFromAPI()
   }, []);
 
@@ -44,6 +49,7 @@ export default function App() {
           <Route path='/' element={<AllVideosListing />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
+          <Route path='/userdetails' element={<UserDetails />} />
           <PrivateRoute path='/playlist' element={<ShowPlayList />} />
           <PrivateRoute path='/watch-later' element={<WatchLater />} />
           <PrivateRoute path='/library' element={<Library />} />
