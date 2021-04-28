@@ -7,7 +7,7 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         const loginStatus = JSON.parse(localStorage?.getItem("VideoAuthDetails"));
         loginStatus?.isUserLoggedIn && setLogin(true);
-    }, []);;
+    }, []);
 
     async function loginUserWithCredentials(email, password) {
         try {

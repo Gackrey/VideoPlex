@@ -1,17 +1,34 @@
+import React, { useEffect, useState } from 'react';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
 import { useVideoContext } from '../Context/VideoContext'
 import VideoCard from '../Components/VideoCard'
 const ShowPlayList = () => {
     const { Playlist, dispatch } = useVideoContext();
     const playlistKeys = Object.keys(Playlist);
+    const [height, setHeight] = useState(0)
+    const constHeight = window.innerHeight;
+    const constNavHeight = document.querySelector('nav')?.clientHeight;
+    useEffect(() => {
+        setTimeout(() => {
+            setHeight(
+                playlistKeys.length * document.querySelector('.playlist-box')?.clientHeight +
+                constNavHeight
+            );
+        }, 100);
+        if (!height)
+            setHeight(0)
+    }, []);
+    console.log(height);
     return (
-        <div>
+        <div style={{
+            marginBottom: "4rem",
+            height: height + constNavHeight < constHeight ? `${constHeight - constNavHeight}px` : `100%`
+        }}>
             {playlistKeys.length > 0 ?
                 playlistKeys.map(item => {
                     return (
-                        <div key={item}>
+                        <div key={item} className="playlist-box">
                             <br />
                             <h1 className="blank-page-text">{item}
                                 <FontAwesomeIcon icon={faTrash}

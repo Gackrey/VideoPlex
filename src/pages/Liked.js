@@ -5,8 +5,25 @@ import { useVideoContext } from '../Context/VideoContext';
 import { Link } from 'react-router-dom'
 const Liked = () => {
     const { LikedList, dispatch } = useVideoContext();
+    const [height, setHeight] = useState(0)
+    const constHeight = window.innerHeight;
+    const constNavHeight = document.querySelector('nav')?.clientHeight;
+    useEffect(() => {
+        setTimeout(() => {
+            setHeight(
+                LikedList.length * document.querySelector('.liked-box')?.clientHeight +
+                constNavHeight
+            );
+        }, 100);
+        if (!height)
+            setHeight(0)
+    }, []);
+    
     return (LikedList.length>0?
-        <div className=" liked">
+        <div className=" liked" style={{
+            marginBottom:"4rem",
+            height: height + constNavHeight < constHeight  ? `${constHeight - constNavHeight}px` : `100%`
+        }}>
         <br/>
         <p style={{textAlign:"start", fontSize:"20px",fontWeight:"bold",color:"GrayText"}}>
         Liked ({LikedList.length} {LikedList.length>1?'videos':'video'})

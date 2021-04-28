@@ -6,14 +6,24 @@ import { Link } from 'react-router-dom'
 const WatchLater = () => {
     const { WatchLater, dispatch } = useVideoContext();
     const [height, setHeight] = useState(0)
+    const constHeight = window.innerHeight;
+    const constNavHeight = document.querySelector('nav').clientHeight;
     useEffect(() => {
-        if (document.querySelector('.watch-later')?.clientHeight > window.innerHeight)
-            setHeight(document.querySelector('.watch-later')?.clientHeight)
-        else
-            setHeight(window.innerHeight)
-    }, [])
+        setTimeout(() => {
+            setHeight(
+                WatchLater.length * document.querySelector('.watch-box')?.clientHeight +
+                constNavHeight
+            );
+        }, 100);
+        if (!height)
+            setHeight(0)
+    }, []);
+
     return (WatchLater.length > 0 ?
-        <div className="watch-later">
+        <div className="watch-later" style={{
+            marginBottom:"4rem",
+            height: height + constNavHeight < constHeight  ? `${constHeight - constNavHeight}px` : `100%`
+        }}>
             <br />
             <p style={{ textAlign: "start", fontSize: "20px", fontWeight: "bold", color: "GrayText" }}>
                 Watch Later ({WatchLater.length} {WatchLater.length > 1 ? 'videos' : 'video'})

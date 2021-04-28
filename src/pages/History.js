@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { faTrash, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useVideoContext } from '../Context/VideoContext';
 import { Link } from 'react-router-dom'
 const History = () => {
+    const [height, setHeight] = useState(0)
+    const constHeight = window.innerHeight;
+    const constNavHeight = document.querySelector('nav').clientHeight;
     const { HistoryList, dispatch } = useVideoContext();
+    useEffect(() => {
+        setTimeout(() => {
+            setHeight(
+                HistoryList.length * document.querySelector('.history-box')?.clientHeight +
+                constNavHeight
+            );
+        }, 100);
+        if (!height)
+            setHeight(0)
+    }, []);
     return (HistoryList.length > 0 ?
-        <div className="history">
+        <div className="history" style={{
+            marginBottom:"4rem",
+            height: height + constNavHeight < constHeight  ? `${constHeight - constNavHeight}px` : `100%`
+        }}>
             {HistoryList.map(history => {
                 return (
                     <div key={history.id} className="history-box">

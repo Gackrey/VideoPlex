@@ -418,6 +418,7 @@ nav{
   .library_body{
     flex-wrap:nowrap;
     overflow: scroll;
+    width: 100vw;
   }
   .Login-container{
     height: 80vh;

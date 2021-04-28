@@ -76,9 +76,14 @@ const VideoPlayer = () => {
             <div className="videoplayer" style={{ textAlign: "start" }}>
                 <PlayListButton state={saveClick} video={displayedVideo} />
                 <RedirectBox state={loginClick} />
-                <br/>
-                <YouTube videoId={displayedVideo.id} opts={opts}
-                    onPlay={() => dispatch({ type: "ADD_TO_HISTORY", payload: displayedVideo })} />
+                <br />
+                <div style={{
+                    width: "max-content",
+                    margin: "auto"
+                }}>
+                    <YouTube videoId={displayedVideo.id} opts={opts}
+                        onPlay={() => dispatch({ type: "ADD_TO_HISTORY", payload: displayedVideo })} />
+                </div>
                 <p className="title">{displayedVideo.snippet.title}</p>
                 <div className="detailArea">
                     <span style={{ textAlign: "start", color: "GrayText" }}>
@@ -139,7 +144,7 @@ const VideoPlayer = () => {
                 <hr />
                 <p style={{ fontWeight: "bold" }}>{displayedVideo.snippet.channelTitle}</p>
                 <p className="description">{displayedVideo.snippet.description}</p>
-                <br/>
+                <br />
             </div> : <div></div>
     );
 }
