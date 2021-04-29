@@ -77,10 +77,7 @@ const VideoPlayer = () => {
                 <PlayListButton state={saveClick} video={displayedVideo} />
                 <RedirectBox state={loginClick} />
                 <br />
-                <div style={{
-                    width: "max-content",
-                    margin: "auto"
-                }}>
+                <div>
                     <YouTube videoId={displayedVideo.id} opts={opts}
                         onPlay={() => dispatch({ type: "ADD_TO_HISTORY", payload: displayedVideo })} />
                 </div>

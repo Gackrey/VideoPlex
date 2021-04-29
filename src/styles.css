@@ -393,9 +393,11 @@ nav{
     display: none;
   }
   .title{
+    word-break: break-all;
     margin-left: 10px;
   }
   .description{
+    word-break: break-all;
     margin-left: 10px;
     margin-bottom: 4rem;
   }
