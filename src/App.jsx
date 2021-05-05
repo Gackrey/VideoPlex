@@ -1,7 +1,7 @@
 import "./styles.css";
 import { Routes, Route } from 'react-router-dom'
 import { AllVideosListing } from './pages/AllVideos'
-import  ShowPlayList  from './pages/ShowPlaylist'
+import ShowPlayList from './pages/ShowPlaylist'
 import Liked from './pages/Liked'
 import { NotFound } from './pages/NotFound'
 import Login from './pages/Login';
@@ -13,7 +13,8 @@ import SideBar from './Components/SideBar'
 import Library from './pages/Library'
 import History from './pages/History'
 import UserDetails from './pages/userDetails'
-import {PrivateRoute} from './PrivateRoute'
+import Search from './pages/Search'
+import { PrivateRoute } from './PrivateRoute'
 import { config } from './config';
 import axios from 'axios'
 import { useVideoContext } from './Context/VideoContext'
@@ -33,7 +34,7 @@ export default function App() {
 
   useEffect(() => {
     const theme = localStorage?.getItem('theme')
-    if(theme){
+    if (theme) {
       document.documentElement.setAttribute('data-theme', theme)
     }
     AllVideos.length === 0 && getDateFromAPI()
@@ -45,8 +46,9 @@ export default function App() {
       <div className="mainPreview">
         <SideBar />
         <Routes>
-          <Route path='/video/:videoId' exact element={<VideoPlayer />} />
           <Route path='/' element={<AllVideosListing />} />
+          <Route path='/search' element={<Search />} />
+          <Route path='/video/:videoId' exact element={<VideoPlayer />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/userdetails' element={<UserDetails />} />

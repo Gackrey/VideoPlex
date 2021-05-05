@@ -1,8 +1,7 @@
 import React from 'react';
+import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom';
-import { useVideoContext } from '../Context/VideoContext';
-import { LazyLoadImage } from 'react-lazy-load-image-component'
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useVideoContext } from '../Context/VideoContext'
 function ViewCalculator({ views }) {
     if (views > 1000000)
         return Math.round(views * 100 / 1000000) / 100 + 'M views'
@@ -19,20 +18,20 @@ function DateCalculator({ date }) {
     else
         return Math.ceil(timeElapsed_inhours / 24) + ' days ago'
 }
-export function AllVideosListing() {
-    const { AllVideos } = useVideoContext();
+const Search = () => {
+    const query = new URLSearchParams(useLocation().search).get("query")
+    const { AllVideos } = useVideoContext()
+    const SearchResult = AllVideos.filter((item) =>
+        item.snippet.title.toLowerCase().includes(query.toLowerCase())
+    )
     return (
-        <div className="AllVideos">
-            { AllVideos.map(video => {
+        SearchResult.length > 0 ?
+            SearchResult.map(video => {
                 return (
                     <div key={video.id} >
                         <Link to={`/video/${video.id}`} style={{ textDecoration: "none" }}>
                             <div className="videoCard" >
-                                <LazyLoadImage
-                                    src={video.snippet.thumbnails.medium.url}
-                                    alt="Loading...."
-                                    effect="blur"
-                                    width="300px" />
+                                <img src={video.snippet.thumbnails.medium.url} alt="Loading...." width="300px" />
                                 <div className="box-body">
                                     <p style={{ textAlign: "start" }}>{video.snippet.title}</p>
                                     <p style={{ marginTop: "10px", textAlign: "start" }}>{video.snippet.channelTitle}</p>
@@ -42,8 +41,8 @@ export function AllVideosListing() {
                         </Link>
                     </div>
                 )
-            })
-            }
-        </div>
-    )
+            }) : <h1>No Videos Found</h1>
+    );
 }
+
+export default Search;

@@ -1,13 +1,14 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import play from '../Img/play.png'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../Context/AuthProvider'
+import { useNavigate } from 'react-router'
 import { useVideoContext } from '../Context/VideoContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun, faUser } from '@fortawesome/free-solid-svg-icons';
 const Navbar = () => {
+  const navigate = useNavigate()
   const { isUserLogin } = useAuth()
-  const { AllVideos, dispatch } = useVideoContext();
   const [searchContent, setSearchContent] = useState('')
   const [theme, setTheme] = useState('dark');
 
@@ -34,14 +35,16 @@ const Navbar = () => {
     }
   }
   function searchHandler(e) {
-    if (e.keyCode === 13) {
-      dispatch({ type: "SEARCH_QUERY", payload: { All: AllVideos, query: searchContent } });
-      setSearchContent("");
+    if (e.keyCode === 13 && searchContent !=="") {
+      navigate(`/search?query=${searchContent}`)
+      setSearchContent('')
     }
   }
   function btnsearchHandler() {
-    dispatch({ type: "SEARCH_QUERY", payload: { All: AllVideos, query: searchContent } });
-    setSearchContent("");
+    if(searchContent !==""){
+      navigate(`/search?query=${searchContent}`)
+      setSearchContent('')
+    }
   }
   return (
     <nav>

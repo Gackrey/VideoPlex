@@ -4,15 +4,6 @@ export default function reducer(state, action) {
             return {
                 ...state, AllVideos: action.payload
             }
-        case 'SEARCH_QUERY':
-            return {
-                ...state,
-                SearchResult:
-                    action.payload.All.filter(item =>
-                        item.snippet.title.toLowerCase().includes(action.payload.query.toLowerCase())
-                    ),
-                isSearched:true
-            }
         case 'REGAIN_VIDEOS':
             return {
                 ...state,
