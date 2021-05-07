@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthProvider'
-const UserDetails = () => {
+export const UserDetails = () => {
     const navigate = useNavigate();
     const { LogOut, updateUser } = useAuth()
     const localUser = JSON.parse(localStorage.getItem('VideoAuthDetails'))
@@ -62,5 +62,3 @@ const UserDetails = () => {
         </div>
     );
 }
-
-export default UserDetails;

@@ -3,7 +3,7 @@ import { faTrash, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useVideoContext } from '../Context/VideoContext';
 import { Link } from 'react-router-dom'
-const WatchLater = () => {
+export const WatchLater = () => {
     const { WatchLater, dispatch } = useVideoContext();
     const [height, setHeight] = useState(0)
     const constHeight = window.innerHeight;
@@ -50,5 +50,3 @@ const WatchLater = () => {
         }} className="blank-page-text">You are all caught up!</h1>
     );
 }
-
-export default WatchLater;

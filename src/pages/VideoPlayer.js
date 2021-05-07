@@ -13,7 +13,7 @@ function ViewCalculator({ views }) {
     else
         return Math.round(views * 100 / 1000) / 100 + 'k views'
 }
-const VideoPlayer = () => {
+export const VideoPlayer = () => {
     const { AllVideos, LikedList, WatchLater, dispatch } = useVideoContext();
     const { isUserLogin } = useAuth()
     const { videoId } = useParams();
@@ -145,5 +145,3 @@ const VideoPlayer = () => {
             </div> : <div></div>
     );
 }
-
-export default VideoPlayer;

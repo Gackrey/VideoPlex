@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useVideoContext } from '../Context/VideoContext';
 import { VideoCard_Library_normal, VideoCard_Library_playlist } from '../Components/VideoCard_Library'
 import { Link } from 'react-router-dom'
-const Library = () => {
+export const Library = () => {
     const { HistoryList, Playlist, WatchLater, LikedList } = useVideoContext();
     const playlistKeys = Object.keys(Playlist)
     const [height, setHeight] = useState(0)
@@ -100,5 +100,3 @@ const Library = () => {
         </div>
     );
 }
-
-export default Library;

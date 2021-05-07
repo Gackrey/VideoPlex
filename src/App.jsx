@@ -1,24 +1,26 @@
 import "./styles.css";
 import { Routes, Route } from 'react-router-dom'
-import { AllVideosListing } from './pages/AllVideos'
-import ShowPlayList from './pages/ShowPlaylist'
-import Liked from './pages/Liked'
-import { NotFound } from './pages/NotFound'
-import Login from './pages/Login';
-import SignUp from './pages/SignUp'
-import WatchLater from './pages/WatchLater'
-import VideoPlayer from './pages/VideoPlayer'
 import Navbar from './Components/Navbar'
 import SideBar from './Components/SideBar'
-import Library from './pages/Library'
-import History from './pages/History'
-import UserDetails from './pages/userDetails'
-import Search from './pages/Search'
 import { PrivateRoute } from './PrivateRoute'
 import { config } from './config';
 import axios from 'axios'
 import { useVideoContext } from './Context/VideoContext'
 import { useEffect } from 'react'
+import {
+  AllVideosListing,
+  Search,
+  VideoPlayer,
+  Login,
+  SignUp,
+  UserDetails,
+  ShowPlayList,
+  WatchLater,
+  Liked,
+  Library,
+  History,
+  NotFound,
+} from './pages/index'
 
 export default function App() {
   const { AllVideos, dispatch } = useVideoContext();

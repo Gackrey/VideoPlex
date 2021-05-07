@@ -3,7 +3,7 @@ import { faTrash, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useVideoContext } from '../Context/VideoContext';
 import { Link } from 'react-router-dom'
-const Liked = () => {
+export const Liked = () => {
     const { LikedList, dispatch } = useVideoContext();
     const [height, setHeight] = useState(0)
     const constHeight = window.innerHeight;
@@ -50,5 +50,3 @@ const Liked = () => {
         }} className="blank-page-text">No Liked videos yet!</h1>
     )
 }
-
-export default Liked;

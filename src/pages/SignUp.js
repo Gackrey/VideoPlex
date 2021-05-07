@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../Context/AuthProvider'
-const SignUp = () => {
+export const SignUp = () => {
     const navigate = useNavigate();
     const [showpasswordState, setPassState] = useState(false);
     const [username, setUsername] = useState('');
@@ -56,5 +56,3 @@ const SignUp = () => {
         </div>
     );
 }
-
-export default SignUp;

@@ -18,7 +18,7 @@ function DateCalculator({ date }) {
     else
         return Math.ceil(timeElapsed_inhours / 24) + ' days ago'
 }
-const Search = () => {
+export const Search = () => {
     const query = new URLSearchParams(useLocation().search).get("query")
     const { AllVideos } = useVideoContext()
     const SearchResult = AllVideos.filter((item) =>
@@ -44,5 +44,3 @@ const Search = () => {
             }) : <h1>No Videos Found</h1>
     );
 }
-
-export default Search;

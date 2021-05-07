@@ -3,7 +3,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useVideoContext } from '../Context/VideoContext'
 import VideoCard from '../Components/VideoCard'
-const ShowPlayList = () => {
+export const ShowPlayList = () => {
     const { Playlist, dispatch } = useVideoContext();
     const playlistKeys = Object.keys(Playlist);
     const [height, setHeight] = useState(0)
@@ -51,5 +51,3 @@ const ShowPlayList = () => {
         </div>
     )
 }
-
-export default ShowPlayList;
