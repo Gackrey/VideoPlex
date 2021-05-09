@@ -49,6 +49,18 @@ nav{
   width: 90%;
   margin: auto;
 }
+.nav-body-2{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.theme-box{
+  background-color: white;
+  padding: 10px;
+  border: 1px solid var(--primary);
+  border-radius: 50%;
+  margin: 0 1rem;
+}
 .logoHeading {
   color: var( --text-color);
   font-size: 1.8rem;
@@ -356,6 +368,33 @@ nav{
   font-size: 22px;
   background-color: var(--alternate-background-colour);
   color: var(--text-color);
+}
+.btn-playlist-close{
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+.new-playlist{
+  font-size: 16px;
+  border: none;
+  outline:none;
+  border-bottom: 1px solid var(--text-color);
+  display: block;
+  margin: 10px 0;
+}
+.library_inner_headings{
+  text-align: start;
+  font-size: 20px;
+  font-weight: bold;
+  color: gray;
+}
+.user-detail_heading{
+  font-weight: bold;
+  font-size: 22px;
+  margin: 5px 0;
 }
 @media only screen and (max-width: 768px) {
   .mainPreview,.AllVideos{

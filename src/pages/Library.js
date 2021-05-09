@@ -33,7 +33,7 @@ export const Library = () => {
         }}>
             <div className='library-box'>
                 <div className="library_heading">
-                    <p style={{ textAlign: "start", fontSize: "20px", fontWeight: "bold", color: "GrayText" }}>
+                    <p className="library_inner_headings">
                         <FontAwesomeIcon icon={faHistory} />
                         <span style={{ marginLeft: "10px" }}>History</span>
                     </p>
@@ -49,7 +49,7 @@ export const Library = () => {
                     }
                 </div>
                 <div className="library_heading">
-                    <p style={{ textAlign: "start", fontSize: "20px", fontWeight: "bold", color: "GrayText" }}>
+                    <p className="library_inner_headings">
                         <FontAwesomeIcon icon={faClock} />
                         <span style={{ marginLeft: "10px" }}>Watch Later</span>
                     </p>
@@ -65,7 +65,7 @@ export const Library = () => {
                     }
                 </div>
                 <div className="library_heading">
-                    <p style={{ textAlign: "start", fontSize: "20px", fontWeight: "bold", color: "GrayText" }}>
+                    <p className="library_inner_headings">
                         <FontAwesomeIcon icon={faIndent} />
                         <span style={{ marginLeft: "10px" }}>Playlists</span>
                     </p>
@@ -81,7 +81,7 @@ export const Library = () => {
                     }
                 </div>
                 <div className="library_heading">
-                    <p style={{ textAlign: "start", fontSize: "20px", fontWeight: "bold", color: "GrayText" }}>
+                    <p className="library_inner_headings">
                         <FontAwesomeIcon icon={faThumbsUp} />
                         <span style={{ marginLeft: "10px" }}>Liked Videos</span>
                     </p>

@@ -27,24 +27,24 @@ export const UserDetails = () => {
                     <h1 style={{ color: "var(--primary)" }}> Details</h1>
                 </div>
                 <div>
-                    <p style={{ fontWeight:"bold", fontSize: "22px", margin: "5px 0" }}>Username</p>
+                    <p className="user-detail_heading">Username</p>
                     <input type="text" className="user-textbox" disabled={editState ? false : true}
                         value={newUsername}
                         onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div>
-                    <p style={{ fontWeight:"bold",fontSize: "22px", margin: "5px 0" }}>Email</p>
+                    <p className="user-detail_heading">Email</p>
                     <input type="email" className="user-textbox" disabled={editState ? false : true}
                         value={newEmail}
                         onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div>
-                    <p style={{ fontWeight:"bold",fontSize: "22px", margin: "5px 0" }}>Password</p>
+                    <p className="user-detail_heading">Password</p>
                     <input type="password" className="user-textbox" disabled={true}
                         value={data.password} />
                 </div>
                 <div>
-                    <p style={{ fontWeight:"bold",fontSize: "22px", margin: "5px 0" }}>New Password</p>
+                    <p className="user-detail_heading">New Password</p>
                     <input type="text" className="user-textbox" disabled={editState ? false : true}
                         value={newPassword}
                         onChange={(e) => setPassword(e.target.value)} />

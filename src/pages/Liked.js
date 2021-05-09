@@ -25,7 +25,7 @@ export const Liked = () => {
             height: height + constNavHeight < constHeight  ? `${constHeight - constNavHeight}px` : `100%`
         }}>
         <br/>
-        <p style={{textAlign:"start", fontSize:"20px",fontWeight:"bold",color:"GrayText"}}>
+        <p className="library_inner_headings">
         Liked ({LikedList.length} {LikedList.length>1?'videos':'video'})
         </p>
             {LikedList.map(liked => {

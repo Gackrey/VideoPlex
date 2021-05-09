@@ -35,13 +35,13 @@ const Navbar = () => {
     }
   }
   function searchHandler(e) {
-    if (e.keyCode === 13 && searchContent !=="") {
+    if (e.keyCode === 13 && searchContent !== "") {
       navigate(`/search?query=${searchContent}`)
       setSearchContent('')
     }
   }
   function btnsearchHandler() {
-    if(searchContent !==""){
+    if (searchContent !== "") {
       navigate(`/search?query=${searchContent}`)
       setSearchContent('')
     }
@@ -89,16 +89,8 @@ const Navbar = () => {
           </div>) : (
           ""
         )}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div style={{
-            backgroundColor: "white",
-            padding: "10px",
-            border: "1px solid var(--primary)",
-            borderRadius: "50%",
-            margin: "0 1rem"
-          }}
-            onClick={themeHandler}
-          >
+        <div className="nav-body-2">
+          <div className="theme-box" onClick={themeHandler}>
             <FontAwesomeIcon
               icon={theme === 'light' ? faMoon : faSun}
               style={{ color: "var(--primary)" }}

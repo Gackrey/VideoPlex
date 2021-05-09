@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useVideoContext } from '../Context/VideoContext'
 
 const PlayListButton = ({ state, video }) => {
-    function isInPlaylist(list){
+    function isInPlaylist(list) {
         let isFound = list.find(item => item.id === video.id);
-        if(isFound === undefined)
+        if (isFound === undefined)
             return false
         else return true
     }
@@ -19,18 +19,11 @@ const PlayListButton = ({ state, video }) => {
         setScreenDisplay(state.screen)
     }, [state]);
     return (
-        <div className="playlistbox" style={{display: ScreenDisplay}}>
+        <div className="playlistbox" style={{ display: ScreenDisplay }}>
             <div className="inner-pbox" style={{ display: boxDisplay }}>
                 <div style={{ padding: "5px 10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <p>Save to...</p>
-                    <button style={{
-                        cursor: "pointer",
-                        color: "GrayText",
-                        fontSize: "18px",
-                        border: "none",
-                        outline: "none",
-                        backgroundColor: "transparent"
-                    }}
+                    <button className="btn-playlist-close"
                         onClick={() => { setBoxDisplay('none'), setScreenDisplay('none') }}
                     >X</button>
                 </div>
@@ -80,14 +73,7 @@ const PlayListButton = ({ state, video }) => {
                         Name
                         <input type="text" value={playlistName}
                             placeholder="Enter playlist name..."
-                            style={{
-                                fontSize: "16px",
-                                border: "none",
-                                borderBottom: "1px solid black",
-                                display: "block",
-                                margin: "10px 0",
-                                outline: "none"
-                            }}
+                            className="new-playlist"
                             onChange={(e) => setPlaylistName(e.target.value)}
                         />
                     </label>
