@@ -4,6 +4,14 @@ export default function video_reducer(state, action) {
             return {
                 ...state, AllVideos: action.payload
             }
+        case 'SET_DATA_FROM_SERVER':
+            return{
+                ...state,
+                LikedList: action.payload.liked,
+                HistoryList:action.payload.history,
+                WatchLater:action.payload.watch_later,
+                Playlist:action.payload.playlist
+            }
         case 'ADD_TO_HISTORY':
             let isAlreadyPresent = state.HistoryList.filter(item => item.id === action.payload.id)
             if (isAlreadyPresent.length === 0)
@@ -11,7 +19,7 @@ export default function video_reducer(state, action) {
             else
                 return state;
         case 'REMOVE_FROM_HISTORY':
-            return { ...state, HistoryList: state.HistoryList.filter(item => item.id !== action.payload) }
+            return { ...state, HistoryList: state.HistoryList.filter(item => item.id !== action.payload.id) }
         case 'ADD_TO_LIKED':
             isAlreadyPresent = state.LikedList.filter(item => item.id === action.payload.id)
             if (isAlreadyPresent.length === 0)
@@ -27,7 +35,7 @@ export default function video_reducer(state, action) {
             else
                 return state;
         case 'REMOVE_FROM_WATCHLATER':
-            return { ...state, WatchLater: state.WatchLater.filter(item => item.id !== action.payload) }
+            return { ...state, WatchLater: state.WatchLater.filter(item => item.id !== action.payload.id) }
         case 'CREATE_PLAYLIST':
             return { ...state, Playlist: { ...state.Playlist, [action.payload]: [] } }
         case 'DELETE_PLAYLIST':
@@ -48,7 +56,7 @@ export default function video_reducer(state, action) {
                 Playlist: {
                     ...state.Playlist,
                     [action.payload.name]:
-                        state.Playlist[action.payload.name].filter(item => item.id !== action.payload.Id)
+                        state.Playlist[action.payload.name].filter(item => item.id !== action.payload.Video.id)
                 }
             }
     }

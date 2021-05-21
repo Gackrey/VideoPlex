@@ -3,7 +3,6 @@ import play from '../Img/play.png'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../Context/AuthProvider'
 import { useNavigate } from 'react-router'
-import { useVideoContext } from '../Context/VideoContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun, faUser } from '@fortawesome/free-solid-svg-icons';
 const Navbar = () => {
@@ -11,17 +10,6 @@ const Navbar = () => {
   const { isUserLogin } = useAuth()
   const [searchContent, setSearchContent] = useState('')
   const [theme, setTheme] = useState('dark');
-
-  useEffect(() => {
-    const localtheme = localStorage?.getItem('theme')
-    if (localtheme === 'light') {
-      setTheme('dark')
-    }
-    else {
-      setTheme('light')
-    }
-  }, []);
-
   function themeHandler() {
     if (theme === 'light') {
       document.documentElement.setAttribute('data-theme', 'dark')

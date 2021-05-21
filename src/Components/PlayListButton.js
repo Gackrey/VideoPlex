@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useVideoContext } from '../Context/VideoContext'
-
+import { addToServer,removeFromServer } from '../api/ServerHandler'
 const PlayListButton = ({ state, video }) => {
     function isInPlaylist(list) {
         let isFound = list.find(item => item.id === video.id);
@@ -18,6 +18,27 @@ const PlayListButton = ({ state, video }) => {
         setBoxDisplay(state.box);
         setScreenDisplay(state.screen)
     }, [state]);
+    async function NewPlaylisthandler(name){
+        setClickedState(false)
+        setClickedState(false)
+        setPlaylistName('')
+        dispatch({ type: "CREATE_PLAYLIST", payload: name })
+        await addToServer('newplaylist',{ name: name })
+    }
+    async function addToPlaylist(newlist,newvideo) {
+        dispatch({
+            type: "ADD_TO_PLAYLIST",
+            payload: { name: newlist, Video: newvideo }
+        });
+        await addToServer('updateplaylist',{ name: newlist,video: newvideo})
+    }
+    async function removeFromPlaylist(newlist,newvideo) {
+        dispatch({
+            type: "REMOVE_FROM_PLAYLIST", 
+            payload: { name: newlist, Video: newvideo }
+        })
+        await removeFromServer('updateplaylist',{ name: newlist,delvideo: newvideo})
+    }
     return (
         <div className="playlistbox" style={{ display: ScreenDisplay }}>
             <div className="inner-pbox" style={{ display: boxDisplay }}>
@@ -36,20 +57,10 @@ const PlayListButton = ({ state, video }) => {
                                     checked={isInPlaylist(Playlist[list])}
                                     onChange={(e) => {
                                         if (e.target.checked) {
-                                            dispatch({
-                                                type: "ADD_TO_PLAYLIST", payload: {
-                                                    name: list,
-                                                    Video: video
-                                                }
-                                            })
+                                            addToPlaylist(list,video)
                                         }
                                         else {
-                                            dispatch({
-                                                type: "REMOVE_FROM_PLAYLIST", payload: {
-                                                    name: list,
-                                                    Id: video.id
-                                                }
-                                            })
+                                            removeFromPlaylist(list,video)
                                         }
                                     }} />
                                 {list}
@@ -78,12 +89,7 @@ const PlayListButton = ({ state, video }) => {
                         />
                     </label>
                     <button className="createPlaylist-btn"
-                        onClick={() => {
-                            setClickedState(false)
-                            dispatch({ type: "CREATE_PLAYLIST", payload: playlistName })
-                            setClickedState(false)
-                            setPlaylistName('')
-                        }}
+                        onClick={() => NewPlaylisthandler(playlistName)}
                     >CREATE</button>
                 </div>
             </div>

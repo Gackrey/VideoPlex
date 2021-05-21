@@ -3,6 +3,7 @@ import { faTrash, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useVideoContext } from '../Context/VideoContext';
 import { Link } from 'react-router-dom'
+import { removeFromServer } from '../api/ServerHandler'
 export const Liked = () => {
     const { LikedList, dispatch } = useVideoContext();
     const [height, setHeight] = useState(0)
@@ -18,7 +19,10 @@ export const Liked = () => {
         if (!height)
             setHeight(0)
     }, []);
-    
+    async function likeHandler(Video){
+        dispatch({ type: "REMOVE_FROM_LIKED", payload: Video })
+        await removeFromServer('liked',Video)
+    }
     return (LikedList.length>0?
         <div className=" liked" style={{
             marginBottom:"4rem",
@@ -41,7 +45,7 @@ export const Liked = () => {
                             </div>
                         </Link>
                         <FontAwesomeIcon style={{ marginLeft: "10px", cursor: "pointer", color: "gray" }} icon={faTrash}
-                            onClick={() => dispatch({ type: "REMOVE_FROM_LIKED", payload: liked })} />
+                            onClick={() => likeHandler(liked)} />
                     </div>
                 )
             })}

@@ -19,14 +19,17 @@ export const UserDetails = () => {
       );
       setData(response.data.user);
     })();
-  }, []);
+  }, [editState]);
   useEffect(() => {
     setUsername(userData.username);
     setEmail(userData.email);
   }, [userData]);
   async function updateuserHandler(newUsername, newEmail, newPassword) {
     const response = await updateUser(newUsername, newEmail, newPassword);
-    if (response.success) setEditstate(false);
+    if (response.success) {
+      setEditstate(false);
+      setPassword('')
+    }
   }
   function logoutHandler() {
     LogOut();
@@ -47,6 +50,7 @@ export const UserDetails = () => {
             disabled={editState ? false : true}
             value={newUsername}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -57,6 +61,7 @@ export const UserDetails = () => {
             disabled={editState ? false : true}
             value={newEmail}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -76,6 +81,7 @@ export const UserDetails = () => {
             disabled={editState ? false : true}
             value={newPassword}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
         <button

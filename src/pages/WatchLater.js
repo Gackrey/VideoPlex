@@ -3,11 +3,12 @@ import { faTrash, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useVideoContext } from '../Context/VideoContext';
 import { Link } from 'react-router-dom'
+import { removeFromServer } from '../api/ServerHandler'
 export const WatchLater = () => {
     const { WatchLater, dispatch } = useVideoContext();
     const [height, setHeight] = useState(0)
     const constHeight = window.innerHeight;
-    const constNavHeight = document.querySelector('nav').clientHeight;
+    const constNavHeight = document.querySelector('nav')?.clientHeight;
     useEffect(() => {
         setTimeout(() => {
             setHeight(
@@ -18,7 +19,10 @@ export const WatchLater = () => {
         if (!height)
             setHeight(0)
     }, []);
-
+    async function watchHandler(Video){
+        dispatch({ type: "REMOVE_FROM_WATCHLATER", payload: Video })
+        await removeFromServer('watch-later',Video)
+    }
     return (WatchLater.length > 0 ?
         <div className="watch-later" style={{
             marginBottom:"4rem",
@@ -41,7 +45,7 @@ export const WatchLater = () => {
                             </div>
                         </Link>
                         <FontAwesomeIcon style={{ marginLeft: "10px", cursor: "pointer", color: "gray" }} icon={faTrash}
-                            onClick={() => dispatch({ type: "REMOVE_FROM_WATCHLATER", payload: later.id })} />
+                            onClick={() => watchHandler(later)} />
                     </div>
                 )
             })}

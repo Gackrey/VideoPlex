@@ -3,10 +3,11 @@ import { faTrash, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useVideoContext } from '../Context/VideoContext';
 import { Link } from 'react-router-dom'
+import { removeFromServer } from '../api/ServerHandler'
 export const History = () => {
     const [height, setHeight] = useState(0)
     const constHeight = window.innerHeight;
-    const constNavHeight = document.querySelector('nav').clientHeight;
+    const constNavHeight = document.querySelector('nav')?.clientHeight;
     const { HistoryList, dispatch } = useVideoContext();
     useEffect(() => {
         setTimeout(() => {
@@ -18,6 +19,10 @@ export const History = () => {
         if (!height)
             setHeight(0)
     }, []);
+    async function historyHandler(Video){
+        dispatch({ type: "REMOVE_FROM_HISTORY", payload: Video })
+        await removeFromServer('history',Video)
+    }
     return (HistoryList.length > 0 ?
         <div className="history" style={{
             marginBottom:"4rem",
@@ -36,7 +41,7 @@ export const History = () => {
                             </div>
                         </Link>
                         <FontAwesomeIcon style={{ marginLeft: "10px", cursor: "pointer", color: "gray" }} icon={faTrash}
-                            onClick={() => dispatch({ type: "REMOVE_FROM_HISTORY", payload: history.id })} />
+                            onClick={() => historyHandler(history)} />
                     </div>
                 )
             })}

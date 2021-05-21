@@ -7,6 +7,7 @@ import { useAuth } from '../Context/AuthProvider';
 import YouTube from 'react-youtube';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faIndent, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { addToServer,removeFromServer } from '../api/ServerHandler'
 function ViewCalculator({ views }) {
     if (views > 1000000)
         return Math.round(views * 100 / 1000000) / 100 + 'M views'
@@ -19,11 +20,12 @@ export const VideoPlayer = () => {
     const { videoId } = useParams();
     const [dislikeState, setDislikeState] = useState(false);
     const [dislikeColor, setDislikeColor] = useState('gray');
-    function likeCounter(Video) {
+    async function likeCounter(Video) {
         if (likeState) {
             setLikeState(false);
             setLikeColor('gray')
             dispatch({ type: "REMOVE_FROM_LIKED", payload: Video })
+            await removeFromServer('liked',Video)
         }
         else {
             setDislikeColor('gray');
@@ -31,9 +33,10 @@ export const VideoPlayer = () => {
             setLikeColor('#007bff');
             setLikeState(true)
             dispatch({ type: "ADD_TO_LIKED", payload: Video })
+            await addToServer('liked',Video)
         }
     }
-    function dislikeCounter(Video) {
+    async function dislikeCounter(Video) {
         if (dislikeState) {
             setDislikeState(false);
             setDislikeColor('gray')
@@ -44,7 +47,26 @@ export const VideoPlayer = () => {
             setDislikeColor('#007bff');
             setDislikeState(true)
             dispatch({ type: "REMOVE_FROM_LIKED", payload: Video })
+            await removeFromServer('liked',Video)
         }
+    }
+    async function watchCounter(Video) {
+        if (laterState) {
+            setLaterState(false);
+            setLaterColor('gray')
+            dispatch({ type: "REMOVE_FROM_WATCHLATER", payload: Video })
+            await removeFromServer('watch-later',Video)
+        }
+        else {
+            setLaterState(true)
+            setLaterColor('#007bff');
+            dispatch({ type: "ADD_TO_WATCHLATER", payload: Video })
+            await addToServer('watch-later',Video)
+        }
+    }
+    async function historyHandler(Video){
+        dispatch({ type: "ADD_TO_HISTORY", payload: Video })
+        await addToServer('history',Video)
     }
     function getVideo(videos, videoId) {
         return videos.find((video) => video.id === videoId);
@@ -79,7 +101,7 @@ export const VideoPlayer = () => {
                 <br />
                 <div>
                     <YouTube videoId={displayedVideo.id} opts={opts}
-                        onPlay={() => dispatch({ type: "ADD_TO_HISTORY", payload: displayedVideo })} />
+                        onPlay={() => historyHandler(displayedVideo) } />
                 </div>
                 <p className="title">{displayedVideo.snippet.title}</p>
                 <div className="detailArea">
@@ -115,9 +137,7 @@ export const VideoPlayer = () => {
                         <div style={{ margin: "0 10px", cursor: "pointer", color: laterColor }}
                             onClick={() => {
                                 if (isUserLogin) {
-                                    dispatch({ type: "ADD_TO_WATCHLATER", payload: displayedVideo })
-                                    setLaterState(true);
-                                    setLaterColor('#007bff')
+                                    watchCounter(displayedVideo)
                                 }
                                 else
                                     setLoginState({ screen: "flex", box: "block" })

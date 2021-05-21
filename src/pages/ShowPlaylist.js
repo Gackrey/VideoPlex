@@ -3,6 +3,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useVideoContext } from '../Context/VideoContext'
 import VideoCard from '../Components/VideoCard'
+import { removeFromServer } from '../api/ServerHandler'
 export const ShowPlayList = () => {
     const { Playlist, dispatch } = useVideoContext();
     const playlistKeys = Object.keys(Playlist);
@@ -19,7 +20,10 @@ export const ShowPlayList = () => {
         if (!height)
             setHeight(0)
     }, []);
-
+    async function deletePlaylist(name){
+        dispatch({ type: "DELETE_PLAYLIST", payload: name })
+        await removeFromServer('newplaylist',{ name: name })
+    }
     return (
         <div style={{
             marginBottom: "4rem",
@@ -33,7 +37,7 @@ export const ShowPlayList = () => {
                             <h1 className="blank-page-text">{item}
                                 <FontAwesomeIcon icon={faTrash}
                                     style={{ marginLeft: "10px", cursor: "pointer" }}
-                                    onClick={() => dispatch({ type: "DELETE_PLAYLIST", payload: item })} />
+                                    onClick={() => deletePlaylist(item)} />
                             </h1>
                             <br />
                             {
