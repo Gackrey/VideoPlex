@@ -1,8 +1,8 @@
 import React, { useContext, createContext, useReducer } from 'react';
-import reducer from '../Reducer/Reducer'
+import video_reducer from '../Reducer/VideoReducer'
 const VideoContext = createContext();
 export function VideoProvider({ children }) {
-    const [state, dispatch] = useReducer(reducer, {
+    const [state, dispatch] = useReducer(video_reducer, {
         AllVideos:[],
         Playlist: {"My PlayList":[]},
         WatchLater: [],

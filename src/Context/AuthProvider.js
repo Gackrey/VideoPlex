@@ -1,81 +1,120 @@
-import React, { createContext, useContext, useState, useEffect } from 'react'
-import { loginUserApi, signupUserApi,updateUserApi } from '../api/fakeAuthapi'
+import React, { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
 export const AuthContext = createContext();
 export function AuthProvider({ children }) {
-    const [isUserLogin, setLogin] = useState(false)
+  const [isUserLogin, setLogin] = useState(false);
 
-    useEffect(() => {
-        const loginStatus = JSON.parse(localStorage?.getItem("VideoAuthDetails"));
-        loginStatus?.isUserLoggedIn && setLogin(true);
-    }, []);
+  useEffect(() => {
+    const loginStatus = JSON.parse(localStorage?.getItem("VideoAuthDetails"));
+    loginStatus?.isUserLoggedIn && setLogin(true);
+  }, []);
 
-    async function loginUserWithCredentials(email, password) {
-        try {
-            const response = await loginUserApi(email, password);
-            if (response.success) {
-                setLogin(true);
-                localStorage.setItem(
-                    "VideoAuthDetails",
-                    JSON.stringify({ isUserLoggedIn: true, data: response.data })
-                );
-                return { success: true }
-            }
-        } catch (error) {
-            console.log("Sahi username password nahi pata kya?", error);
-            return { success: false }
+  async function loginUserWithCredentials(email, password) {
+    try {
+      const response = await axios.post(
+        "https://videoplex-backend.herokuapp.com/user/login",
+        { email, password }
+      );
+      const data = response.data;
+      if (data.success) {
+        setLogin(true);
+        localStorage.setItem(
+          "VideoAuthDetails",
+          JSON.stringify({
+            isUserLoggedIn: true,
+            id: data.id,
+            icon: data.icon.toUpperCase()
+          })
+        );
+        return { success: true };
+      }
+    } catch (error) {
+      console.log("Sahi username password nahi pata kya?", error);
+      return { success: false };
+    }
+  }
+
+  async function signinUser(username, email, password) {
+    try {    
+      const response = await axios.post(
+        "https://videoplex-backend.herokuapp.com/user/signup",
+        {
+          username,
+          email,
+          password,
+          history: [],
+          liked: [],
+          watch_later: [],
+          playlist: { "My PlayList": [] },
         }
+      );
+      const data = response.data;
+      if (data.success) {
+        setLogin(true);
+        localStorage.setItem(
+          "VideoAuthDetails",
+          JSON.stringify({
+            isUserLoggedIn: true,
+            id: data.id,
+            icon: data.icon.toUpperCase()
+          })
+        );
+        return { success: true };
+      }
+    } catch (error) {
+      console.log("Sahi username password nahi pata kya?", error);
+      return { success: false };
     }
+  }
 
-    async function signinUser(username, email, password) {
-        try {
-            const response = await signupUserApi(username, email, password)
-            if (response.success) {
-                setLogin(true);
-                localStorage.setItem(
-                    "VideoAuthDetails",
-                    JSON.stringify({ isUserLoggedIn: true, data: response.data })
-                );
-                return { success: true }
-            }
-        } catch (error) {
-            console.log("Sahi username password nahi pata kya?", error);
-            return { success: false }
+  async function updateUser(username, email, password) {
+    try {
+      const loginStatus = JSON.parse(localStorage.getItem("VideoAuthDetails"));
+      const id = loginStatus.id;
+      const response = await axios.post(
+        `https://videoplex-backend.herokuapp.com/user/${id}/updateuser`,
+        {
+          username,
+          email,
+          password,
         }
+      );
+      const data = response.data;
+      if (data.success) {
+        setLogin(true);
+        localStorage.setItem(
+          "VideoAuthDetails",
+          JSON.stringify({
+            isUserLoggedIn: true,
+            id: data.id,
+            icon: data.icon.toUpperCase(),
+          })
+        );
+        return { success: true };
+      }
+    } catch (error) {
+      console.log("Sahi username password nahi pata kya?", error);
+      return { success: false };
     }
-
-    async function updateUser(oldname, oldpassword,username, email, password) {
-        try {
-            const response = await updateUserApi(oldname, oldpassword,username, email, password)
-            if (response.success) {
-                setLogin(true);
-                localStorage.setItem(
-                    "VideoAuthDetails",
-                    JSON.stringify({ isUserLoggedIn: true, data: response.data })
-                );
-                return { success: true }
-            }
-        } catch (error) {
-            console.log("Sahi username password nahi pata kya?", error);
-            return { success: false }
-        }
-    }
-    function LogOut() {
-        setLogin(false);
-        localStorage.removeItem("VideoAuthDetails");
-    }
-    return (
-        <AuthContext.Provider
-            value={{
-                isUserLogin,
-                loginUserWithCredentials,
-                signinUser,
-                updateUser,
-                LogOut
-            }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  }
+  function LogOut() {
+    setLogin(false);
+    localStorage.removeItem("VideoAuthDetails");
+  }
+  return (
+    <AuthContext.Provider
+      value={{
+        isUserLogin,
+        loginUserWithCredentials,
+        signinUser,
+        updateUser,
+        LogOut,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }
 export function useAuth() {
-    return useContext(AuthContext)
+  return useContext(AuthContext);
 }
