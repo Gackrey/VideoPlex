@@ -138,6 +138,7 @@ nav{
 .videoCard-playlist-text{
   text-align: center;
   width: 100%;
+  margin: 0.5rem 0;
   font-size: 20px;
   color: var(--text-color);
 }

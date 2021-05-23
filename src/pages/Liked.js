@@ -20,8 +20,8 @@ export const Liked = () => {
             setHeight(0)
     }, []);
     async function likeHandler(Video){
-        dispatch({ type: "REMOVE_FROM_LIKED", payload: Video })
         await removeFromServer('liked',Video)
+        dispatch({ type: "REMOVE_FROM_LIKED", payload: Video })
     }
     return (LikedList.length>0?
         <div className=" liked" style={{

@@ -21,8 +21,8 @@ export const ShowPlayList = () => {
             setHeight(0)
     }, []);
     async function deletePlaylist(name){
-        dispatch({ type: "DELETE_PLAYLIST", payload: name })
         await removeFromServer('newplaylist',{ name: name })
+        dispatch({ type: "DELETE_PLAYLIST", payload: name })
     }
     return (
         <div style={{

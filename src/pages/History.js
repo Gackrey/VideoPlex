@@ -20,8 +20,8 @@ export const History = () => {
             setHeight(0)
     }, []);
     async function historyHandler(Video){
-        dispatch({ type: "REMOVE_FROM_HISTORY", payload: Video })
         await removeFromServer('history',Video)
+        dispatch({ type: "REMOVE_FROM_HISTORY", payload: Video })
     }
     return (HistoryList.length > 0 ?
         <div className="history" style={{

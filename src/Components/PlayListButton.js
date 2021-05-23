@@ -19,25 +19,25 @@ const PlayListButton = ({ state, video }) => {
         setScreenDisplay(state.screen)
     }, [state]);
     async function NewPlaylisthandler(name){
+        await addToServer('newplaylist',{ name: name })
         setClickedState(false)
         setClickedState(false)
         setPlaylistName('')
         dispatch({ type: "CREATE_PLAYLIST", payload: name })
-        await addToServer('newplaylist',{ name: name })
     }
     async function addToPlaylist(newlist,newvideo) {
+        await addToServer('updateplaylist',{ name: newlist,video: newvideo})
         dispatch({
             type: "ADD_TO_PLAYLIST",
             payload: { name: newlist, Video: newvideo }
         });
-        await addToServer('updateplaylist',{ name: newlist,video: newvideo})
     }
     async function removeFromPlaylist(newlist,newvideo) {
+        await removeFromServer('updateplaylist',{ name: newlist,delvideo: newvideo})
         dispatch({
             type: "REMOVE_FROM_PLAYLIST", 
             payload: { name: newlist, Video: newvideo }
         })
-        await removeFromServer('updateplaylist',{ name: newlist,delvideo: newvideo})
     }
     return (
         <div className="playlistbox" style={{ display: ScreenDisplay }}>

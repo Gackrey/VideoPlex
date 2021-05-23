@@ -20,13 +20,13 @@ function ViewCalculator({ views }) {
 const VideoCard = ({ videos, list }) => {
   const { dispatch } = useVideoContext();
   async function removeFromPlaylist(newlist, newvideo) {
-    dispatch({
-      type: "REMOVE_FROM_PLAYLIST",
-      payload: { name: newlist, Video: newvideo },
-    });
     await removeFromServer("updateplaylist", {
       name: newlist,
       delvideo: newvideo,
+    });
+    dispatch({
+      type: "REMOVE_FROM_PLAYLIST",
+      payload: { name: newlist, Video: newvideo },
     });
   }
   return (

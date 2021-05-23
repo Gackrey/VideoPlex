@@ -40,6 +40,6 @@ export function VideoCard_Library_playlist({ name, playlist }) {
                             }}>{name}</p>
                     </div>
                 </Link>
-            </div> : <p className="videoCard-playlist-text">No videos in playlists found</p>
+            </div> : <p className="videoCard-playlist-text">No videos in {name} found</p>
     );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PlayListButton from '../Components/PlayListButton';
 import RedirectBox from '../Components/RedirectBox'
 import { useParams } from 'react-router-dom'
@@ -22,18 +22,18 @@ export const VideoPlayer = () => {
     const [dislikeColor, setDislikeColor] = useState('gray');
     async function likeCounter(Video) {
         if (likeState) {
+            await removeFromServer('liked',Video)
             setLikeState(false);
             setLikeColor('gray')
             dispatch({ type: "REMOVE_FROM_LIKED", payload: Video })
-            await removeFromServer('liked',Video)
         }
         else {
+            await addToServer('liked',Video)
             setDislikeColor('gray');
             setDislikeState(false);
             setLikeColor('#007bff');
             setLikeState(true)
             dispatch({ type: "ADD_TO_LIKED", payload: Video })
-            await addToServer('liked',Video)
         }
     }
     async function dislikeCounter(Video) {
@@ -42,31 +42,31 @@ export const VideoPlayer = () => {
             setDislikeColor('gray')
         }
         else {
+            await removeFromServer('liked',Video)
             setLikeState(false);
             setLikeColor('gray')
             setDislikeColor('#007bff');
             setDislikeState(true)
             dispatch({ type: "REMOVE_FROM_LIKED", payload: Video })
-            await removeFromServer('liked',Video)
         }
     }
     async function watchCounter(Video) {
         if (laterState) {
+            await removeFromServer('watch-later',Video)
             setLaterState(false);
             setLaterColor('gray')
             dispatch({ type: "REMOVE_FROM_WATCHLATER", payload: Video })
-            await removeFromServer('watch-later',Video)
         }
         else {
+            await addToServer('watch-later',Video)
             setLaterState(true)
             setLaterColor('#007bff');
             dispatch({ type: "ADD_TO_WATCHLATER", payload: Video })
-            await addToServer('watch-later',Video)
         }
     }
     async function historyHandler(Video){
-        dispatch({ type: "ADD_TO_HISTORY", payload: Video })
         await addToServer('history',Video)
+        dispatch({ type: "ADD_TO_HISTORY", payload: Video })
     }
     function getVideo(videos, videoId) {
         return videos.find((video) => video.id === videoId);
@@ -74,15 +74,17 @@ export const VideoPlayer = () => {
     const displayedVideo = getVideo(AllVideos, videoId);
     const likedVideo = getVideo(LikedList, videoId);
     const watchedVideo = getVideo(WatchLater, videoId);
-    let currentLikeState = false, currentLaterState = false;
-    if (likedVideo !== undefined)
-        currentLikeState = true;
-    if (watchedVideo !== undefined)
-        currentLaterState = true;
-    const [likeState, setLikeState] = useState(currentLikeState);
-    const [laterState, setLaterState] = useState(currentLaterState);
-    const [likeColor, setLikeColor] = useState(currentLikeState ? '#007bff' : 'gray');
-    const [laterColor, setLaterColor] = useState(currentLaterState ? '#007bff' : 'gray');
+    useEffect(() =>{
+        if (likedVideo !== undefined){
+            setLikeState(true);
+            setLikeColor('#007bff')
+        }
+        if (watchedVideo !== undefined){
+            setLaterState(true);
+            setLaterColor('#007bff')
+        }
+    },[LikedList,WatchLater])
+    
     const variableHeight = window.innerWidth < 610 ? '320' : '530';
     const opts = {
         height: variableHeight,
@@ -93,6 +95,10 @@ export const VideoPlayer = () => {
     };
     const [saveClick, setSaveState] = useState({ screen: "none", box: "none" });
     const [loginClick, setLoginState] = useState({ screen: "none", box: "none" });
+    const [likeState, setLikeState] = useState(false);
+    const [laterState, setLaterState] = useState(false);
+    const [likeColor, setLikeColor] = useState(likeState ? '#007bff' : 'gray');
+    const [laterColor, setLaterColor] = useState(laterState ? '#007bff' : 'gray');
     return (
         displayedVideo ?
             <div className="videoplayer" style={{ textAlign: "start" }}>

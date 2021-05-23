@@ -20,8 +20,8 @@ export const WatchLater = () => {
             setHeight(0)
     }, []);
     async function watchHandler(Video){
-        dispatch({ type: "REMOVE_FROM_WATCHLATER", payload: Video })
         await removeFromServer('watch-later',Video)
+        dispatch({ type: "REMOVE_FROM_WATCHLATER", payload: Video })
     }
     return (WatchLater.length > 0 ?
         <div className="watch-later" style={{
