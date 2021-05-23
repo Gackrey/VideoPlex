@@ -9,7 +9,15 @@ const Navbar = () => {
   const navigate = useNavigate()
   const { isUserLogin } = useAuth()
   const [searchContent, setSearchContent] = useState('')
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    const theme = localStorage?.getItem("theme");
+    if (theme) {
+      setTheme(theme);
+    } 
+  },[theme])
+
   function themeHandler() {
     if (theme === 'light') {
       document.documentElement.setAttribute('data-theme', 'dark')
