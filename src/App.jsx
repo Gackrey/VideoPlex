@@ -49,11 +49,17 @@ export default function App() {
       (async function () {
         try {
           localUser = JSON.parse(localUser);
-          const id = localUser.id;
+          const token = localUser.id;
           const response = await axios.get(
-            `https://videoplex-backend.herokuapp.com/user/${id}`
+            `https://videoplex-backend.herokuapp.com/user/userDetails`,
+            {
+              headers: { authorization: token },
+            }
           );
-          dispatch({ type: "SET_DATA_FROM_SERVER", payload: response.data.user });
+          dispatch({
+            type: "SET_DATA_FROM_SERVER",
+            payload: response.data.user,
+          });
         } catch (error) {
           console.error("Error", error);
         }

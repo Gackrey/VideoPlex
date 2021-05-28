@@ -13,9 +13,12 @@ export const UserDetails = () => {
   useEffect(() => {
     (async function () {
       const localUser = JSON.parse(localStorage.getItem("VideoAuthDetails"));
-      const id = localUser.id;
+      const token = localUser.id;
       const response = await axios.get(
-        `https://videoplex-backend.herokuapp.com/user/${id}`
+        `https://videoplex-backend.herokuapp.com/user/userDetails`,
+        {
+          headers: { authorization: token },
+        }
       );
       setData(response.data.user);
     })();
@@ -28,7 +31,7 @@ export const UserDetails = () => {
     const response = await updateUser(newUsername, newEmail, newPassword);
     if (response.success) {
       setEditstate(false);
-      setPassword('')
+      setPassword("");
     }
   }
   function logoutHandler() {
