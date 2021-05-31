@@ -16,6 +16,7 @@ html[data-theme=dark] {
 *{
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 .App {
   font-family: sans-serif;
@@ -396,6 +397,20 @@ nav{
   font-weight: bold;
   font-size: 22px;
   margin: 5px 0;
+}
+.circle{
+  position: fixed;
+  right: 19px;
+  bottom: 60px;
+  padding: 14px 17px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  z-index: 3;
+}
+.circle svg{
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
 }
 @media only screen and (max-width: 768px) {
   .mainPreview,.AllVideos{
