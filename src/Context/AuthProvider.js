@@ -45,7 +45,7 @@ export function AuthProvider({ children }) {
           history: [],
           liked: [],
           watch_later: [],
-          playlist: { "My PlayList": [] },
+          playlist: [],
         }
       );
       const data = response.data;

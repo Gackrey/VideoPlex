@@ -6,14 +6,13 @@ import VideoCard from '../Components/VideoCard'
 import { removeFromServer } from '../api/ServerHandler'
 export const ShowPlayList = () => {
     const { Playlist, dispatch } = useVideoContext();
-    const playlistKeys = Object.keys(Playlist);
     const [height, setHeight] = useState(0)
     const constHeight = window.innerHeight;
     const constNavHeight = document.querySelector('nav')?.clientHeight;
     useEffect(() => {
         setTimeout(() => {
             setHeight(
-                playlistKeys.length * document.querySelector('.playlist-box')?.clientHeight +
+                Playlist.length * document.querySelector('.playlist-box')?.clientHeight +
                 constNavHeight
             );
         }, 100);
@@ -29,20 +28,20 @@ export const ShowPlayList = () => {
             marginBottom: "4rem",
             height: height + constNavHeight < constHeight ? `${constHeight - constNavHeight}px` : `100%`
         }}>
-            {playlistKeys.length > 0 ?
-                playlistKeys.map(item => {
+            { Playlist.length > 0 ?
+                Playlist.map(item => {
                     return (
-                        <div key={item} className="playlist-box">
+                        <div key={item.playlistName} className="playlist-box">
                             <br />
-                            <h1 className="blank-page-text">{item}
+                            <h1 className="blank-page-text">{item.playlistName}
                                 <FontAwesomeIcon icon={faTrash}
                                     style={{ marginLeft: "10px", cursor: "pointer" }}
-                                    onClick={() => deletePlaylist(item)} />
+                                    onClick={() => deletePlaylist(item.playlistName)} />
                             </h1>
                             <br />
                             {
-                                Playlist[item].length > 0 ?
-                                    <VideoCard list={item} videos={Playlist[item]} /> :
+                                item.playlistVideo.length > 0 ?
+                                    <VideoCard list={item.playlistName} videos={item.playlistVideo} /> :
                                     <p className="blank-page-text">No Videos in this playlist</p>
                             }
                         </div>

@@ -9,7 +9,6 @@ const PlayListButton = ({ state, video }) => {
         else return true
     }
     const { Playlist, dispatch } = useVideoContext();
-    const playlistKeys = Object.keys(Playlist);
     const [boxDisplay, setBoxDisplay] = useState(state.box)
     const [ScreenDisplay, setScreenDisplay] = useState(state.screen)
     const [createPlaylistClicked, setClickedState] = useState(false);
@@ -50,20 +49,20 @@ const PlayListButton = ({ state, video }) => {
                 </div>
                 <hr />
                 {
-                    playlistKeys.map(list => {
+                    Playlist.map(list => {
                         return (
-                            <label key={list} style={{ margin: "10px", display: "flex", justifyContent: "space-evenly" }}>
+                            <label key={list.playlistName} style={{ margin: "10px", display: "flex", justifyContent: "space-evenly" }}>
                                 <input type="checkbox"
-                                    checked={isInPlaylist(Playlist[list])}
+                                    checked={isInPlaylist(list.playlistVideo)}
                                     onChange={(e) => {
                                         if (e.target.checked) {
-                                            addToPlaylist(list,video)
+                                            addToPlaylist(list.playlistName,video)
                                         }
                                         else {
-                                            removeFromPlaylist(list,video)
+                                            removeFromPlaylist(list.playlistName,video)
                                         }
                                     }} />
-                                {list}
+                                {list.playlistName}
                             </label>)
                     })
                 }

@@ -75,8 +75,13 @@ export const Library = () => {
                 </div>
                 <div className="library_body">
                     {
-                        playlistKeys.length > 0 ?
-                            playlistKeys.map(watch => <VideoCard_Library_playlist name={watch} playlist={Playlist[watch]} />) :
+                        Playlist.length > 0 ?
+                        Playlist.map((watch) => (
+                            <VideoCard_Library_playlist
+                              name={watch.playlistName}
+                              playlist={watch.playlistVideo}
+                            />
+                          )) :
                             <p className="videoCard-playlist-text">No playlist found</p>
                     }
                 </div>

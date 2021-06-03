@@ -4,7 +4,7 @@ const VideoContext = createContext();
 export function VideoProvider({ children }) {
     const [state, dispatch] = useReducer(video_reducer, {
         AllVideos:[],
-        Playlist: {"My PlayList":[]},
+        Playlist: [],
         WatchLater: [],
         HistoryList: [],
         LikedList: [],
