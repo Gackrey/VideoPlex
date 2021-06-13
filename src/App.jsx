@@ -27,9 +27,9 @@ export default function App() {
   async function getDataFromAPI() {
     try {
       const response = await axios.get(
-        `${config.YOUTUBE_LINK}&key=${config.API_KEY}`
+        "https://videoplex-backend.herokuapp.com/video/all-video"
       );
-      dispatch({ type: "INITIALIZE_VIDEOS", payload: response.data.items });
+      dispatch({ type: "INITIALIZE_VIDEOS", payload: response.data });
     } catch (error) {
       console.error("Error", error);
     }
