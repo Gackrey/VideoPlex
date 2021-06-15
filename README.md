@@ -42,3 +42,5 @@ This video library application have the following features. It is being built on
    * User detail update
    * User's watch-later history and liked Videos
    * Adding and removing custom playlists
+
+Backend Repo:- https://github.com/Gackrey/videoplex-backend/tree/development
