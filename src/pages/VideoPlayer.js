@@ -8,6 +8,8 @@ import YouTube from 'react-youtube';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faIndent, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { addToServer,removeFromServer } from '../api/ServerHandler'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 function ViewCalculator({ views }) {
     if (views > 1000000)
         return Math.round(views * 100 / 1000000) / 100 + 'M views'
@@ -168,6 +170,6 @@ export const VideoPlayer = () => {
                 <p style={{ fontWeight: "bold" }}>{displayedVideo.snippet.channelTitle}</p>
                 <p className="description">{displayedVideo.snippet.description}</p>
                 <br />
-            </div> : <div></div>
+            </div> : <Loader type="Bars" color="#00BFFF" className="center" height={80} width={80} />
     );
 }

@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import SideBar from "./Components/SideBar";
 import { PrivateRoute } from "./PrivateRoute";
-import { config } from "./config";
 import axios from "axios";
 import { useVideoContext } from "./Context/VideoContext";
 import { useEffect } from "react";
