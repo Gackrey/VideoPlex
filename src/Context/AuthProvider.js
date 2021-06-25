@@ -70,26 +70,21 @@ export function AuthProvider({ children }) {
   async function updateUser(username, email, password) {
     try {
       const loginStatus = JSON.parse(localStorage.getItem("VideoAuthDetails"));
-      const id = loginStatus.id;
+      const token = loginStatus.id;
       const response = await axios.post(
-        `https://videoplex-backend.herokuapp.com/user/${id}/updateuser`,
+        `https://videoplex-backend.herokuapp.com/user/updateuser`,
         {
           username,
           email,
           password,
+        },
+        {
+          headers: { authorization: token },
         }
       );
       const data = response.data;
       if (data.success) {
         setLogin(true);
-        localStorage.setItem(
-          "VideoAuthDetails",
-          JSON.stringify({
-            isUserLoggedIn: true,
-            id: data.id,
-            icon: data.icon.toUpperCase(),
-          })
-        );
         return { success: true };
       }
     } catch (error) {

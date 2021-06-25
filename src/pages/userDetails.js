@@ -7,6 +7,7 @@ export const UserDetails = () => {
   const { LogOut, updateUser } = useAuth();
   const [userData, setData] = useState({});
   const [editState, setEditstate] = useState(false);
+  const [editError, setEditError] = useState(false);
   const [newUsername, setUsername] = useState("");
   const [newEmail, setEmail] = useState("");
   const [newPassword, setPassword] = useState("");
@@ -32,7 +33,8 @@ export const UserDetails = () => {
     if (response.success) {
       setEditstate(false);
       setPassword("");
-    }
+      setEditError(false);
+    } else setEditError(true);
   }
   function logoutHandler() {
     LogOut();
@@ -86,6 +88,9 @@ export const UserDetails = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+        </div>
+        <div className={editError ? "error" : "error-transperent"}>
+          Enter a password greater than 6 characters
         </div>
         <button
           className="btn-update"
