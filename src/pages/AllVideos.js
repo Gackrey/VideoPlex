@@ -6,19 +6,8 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import ScrollToTop from "../Components/ScrollToTop";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
-function ViewCalculator({ views }) {
-  if (views > 1000000)
-    return Math.round((views * 100) / 1000000) / 100 + "M views";
-  else return Math.round((views * 100) / 1000) / 100 + "k views";
-}
-function DateCalculator({ date }) {
-  let timeElapsed = Date.now() - Date.parse(date);
-  let timeElapsed_inhours = Math.ceil(timeElapsed / 3600000);
-  if (timeElapsed_inhours < 23) return timeElapsed_inhours + " hours ago";
-  else if (timeElapsed_inhours === 24)
-    return Math.ceil(timeElapsed_inhours / 24) + " day ago";
-  else return Math.ceil(timeElapsed_inhours / 24) + " days ago";
-}
+import { DateCalculator, ViewCalculator } from "../utils";
+
 export function AllVideosListing() {
   const { AllVideos } = useVideoContext();
   return (
@@ -55,7 +44,13 @@ export function AllVideosListing() {
           );
         })
       ) : (
-        <Loader type="Bars" color="#00BFFF" className="center" height={80} width={80} />
+        <Loader
+          type="Bars"
+          color="#00BFFF"
+          className="center"
+          height={80}
+          width={80}
+        />
       )}
     </div>
   );
