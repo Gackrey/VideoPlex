@@ -20,13 +20,14 @@ import {
   History,
   NotFound,
 } from "./pages/index";
+import {API_URL} from './Constants';
 
 export default function App() {
   const { AllVideos, dispatch } = useVideoContext();
   async function getDataFromAPI() {
     try {
       const response = await axios.get(
-        "https://videoplex-backend.herokuapp.com/video/all-video"
+        `${API_URL}/video/all-video`
       );
       dispatch({ type: "INITIALIZE_VIDEOS", payload: response.data });
     } catch (error) {
@@ -50,7 +51,7 @@ export default function App() {
           localUser = JSON.parse(localUser);
           const token = localUser.id;
           const response = await axios.get(
-            `https://videoplex-backend.herokuapp.com/user/userDetails`,
+            `${API_URL}/user/userDetails`,
             {
               headers: { authorization: token },
             }

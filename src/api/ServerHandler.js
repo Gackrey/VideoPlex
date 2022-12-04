@@ -1,10 +1,12 @@
 import axios from "axios";
+import {API_URL} from '../Constants';
+
 export async function addToServer(route, data) {
   const localUser = JSON.parse(localStorage.getItem("VideoAuthDetails"));
   const token = localUser.id;
   try {
     await axios.post(
-      `https://videoplex-backend.herokuapp.com/user/${route}`,
+      `${API_URL}/user/${route}`,
       data,
       {
         headers: { authorization: token },
@@ -20,7 +22,7 @@ export async function removeFromServer(route, data) {
   const token = localUser.id;
   try {
     await axios.delete(
-      `https://videoplex-backend.herokuapp.com/user/${route}`,
+      `${API_URL}/user/${route}`,
       {
         headers: { authorization: token },
         data,

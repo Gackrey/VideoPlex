@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import {API_URL} from '../Constants';
+
 export const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [isUserLogin, setLogin] = useState(false);
@@ -12,7 +14,7 @@ export function AuthProvider({ children }) {
   async function loginUserWithCredentials(email, password) {
     try {
       const response = await axios.post(
-        "https://videoplex-backend.herokuapp.com/user/login",
+        `${API_URL}/user/login`,
         { email, password }
       );
       const data = response.data;
@@ -37,7 +39,7 @@ export function AuthProvider({ children }) {
   async function signinUser(username, email, password) {
     try {    
       const response = await axios.post(
-        "https://videoplex-backend.herokuapp.com/user/signup",
+        `${API_URL}/user/signup`,
         {
           username,
           email,
@@ -72,7 +74,7 @@ export function AuthProvider({ children }) {
       const loginStatus = JSON.parse(localStorage.getItem("VideoAuthDetails"));
       const token = loginStatus.id;
       const response = await axios.post(
-        `https://videoplex-backend.herokuapp.com/user/updateuser`,
+        `${API_URL}/user/updateuser`,
         {
           username,
           email,

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthProvider";
+import {API_URL} from '../Constants';
+
 export const UserDetails = () => {
   const navigate = useNavigate();
   const { LogOut, updateUser } = useAuth();
@@ -16,7 +18,7 @@ export const UserDetails = () => {
       const localUser = JSON.parse(localStorage.getItem("VideoAuthDetails"));
       const token = localUser.id;
       const response = await axios.get(
-        `https://videoplex-backend.herokuapp.com/user/userDetails`,
+        `${API_URL}/user/userDetails`,
         {
           headers: { authorization: token },
         }
